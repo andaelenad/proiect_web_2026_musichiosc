@@ -1,0 +1,39 @@
+@media screen and (max-width: 700px) {
+  #hamburger {
+    display: block;
+    cursor: pointer;
+    img { height: 2.5rem; }
+  }
+
+  ul.meniu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    background-color: var(--menu-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-speed) ease-in-out;
+    z-index: 2000;
+
+    li:first-child a {
+      .text-nav { display: none; }
+      &::before {
+        font-family: "Font Awesome 6 Free";
+        content: "\f015";
+        font-weight: 900;
+        font-size: 1.8rem;
+        color: white;
+      }
+    }
+
+    li {
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+  }
+
+  #ch-menu:checked + ul.meniu {
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sourceRoot": "",
+  "sources": ["../scss/nav1000.scss"],
+  "names": [],
+  "mappings": "AAAA,MAAM,uBAAwB;EAC5B,QAAS,GAAG,EAAE;IACZ,KAAK,EAAE,IAAI;IAEX,CAAE,GAAG,EAAE,CAAC;MACN,SAAS,EAAE,MAAM;MAEjB,UAAW,EAAE;QACX,OAAO,EAAE,IAAI;OACd;MAED,WAAY,EAAE;QACZ,OAAO,EAAE,YAAY;QACrB,SAAS,EAAE,MAAM;OAClB",
+  "file": "nav1000.css"
+}

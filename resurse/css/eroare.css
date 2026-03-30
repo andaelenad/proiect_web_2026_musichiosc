@@ -1,0 +1,100 @@
+/* Fișier: eroare.css - Musichiosc */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Asigură că eroarea este centrată pe verticală */
+    padding: var(--spatiu-box);
+}
+
+#err-coloane {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1000px;
+    background-color: #ffffff;
+    padding: 3rem;
+    border: 3px solid var(--color-border);
+    border-radius: 15px;
+    box-shadow: 8px 8px 0px var(--color-main); /* Umbră stilizată tip retro-vinyl */
+}
+
+#err-imag {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#err-imag img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
+    /* Animație subtilă pentru imaginea de eroare */
+    animation: vibreaza 0.5s infinite alternate ease-in-out;
+}
+
+#err-coloane section {
+    flex: 2;
+    text-align: left;
+}
+
+#err-coloane h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: var(--color-main);
+    border-bottom: 2px solid var(--color-highlight);
+    display: inline-block;
+}
+
+#err-coloane p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 2rem;
+}
+
+/* Stil pentru butonul de întoarcere la Home (dacă există în EJS) */
+#err-coloane a {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--color-bg-dark);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 2px solid var(--color-main);
+    transition: all 0.3s ease;
+}
+
+#err-coloane a:hover {
+    background-color: var(--color-main);
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 15px rgba(216, 27, 96, 0.4);
+}
+
+/* Keyframes pentru animația imaginii */
+@keyframes vibreaza {
+    from { transform: rotate(-2deg); }
+    to { transform: rotate(2deg); }
+}
+
+/* Responsivitate pentru ecrane mici (Mobil) */
+@media screen and (max-width: 768px) {
+    #err-coloane {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    #err-coloane section {
+        text-align: center;
+    }
+
+    #err-coloane h2 {
+        font-size: 2.5rem;
+    }
+}

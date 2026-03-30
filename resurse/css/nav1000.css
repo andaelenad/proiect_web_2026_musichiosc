@@ -1,0 +1,15 @@
+ul.meniu li a .text-icon {
+    display: none;
+}
+
+ul.meniu li a .imag-icon {
+    display: inline-block;
+}
+
+ul.meniu li {
+    width: 65px;
+}
+
+ul.meniu li a {
+    font-size: 0.85rem;
+}

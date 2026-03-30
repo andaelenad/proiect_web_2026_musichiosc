@@ -1,0 +1,47 @@
+#hamburger {
+    display: block;
+    cursor: pointer;
+}
+
+#hamburger img {
+    height: 2.5rem;
+}
+
+ul.meniu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    background-color: var(--color-bg-dark);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-speed) ease-in-out;
+    z-index: 2000;
+}
+
+#ch-menu:checked + ul.meniu {
+    transform: scaleX(1);
+}
+
+ul.meniu li {
+    width: 100%;
+}
+
+ul.meniu li:first-child .text-icon {
+    display: none;
+}
+
+ul.meniu li:first-child a::before {
+    font-family: "Font Awesome 6 Free";
+    content: "\f015";
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: white;
+}
+
+ul.meniu ul {
+    position: static;
+    width: 100%;
+    transform: none;
+    border: none;
+}

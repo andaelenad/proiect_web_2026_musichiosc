@@ -1,0 +1,52 @@
+{
+    "cale_baza": "/resurse/imagini/erori",
+    "eroare_default": {
+        "titlu": "Săritură de ac!",
+        "text": "Ceva nu sună bine în fluxul audio. A intervenit o eroare neașteptată.",
+        "imagine": "eroare_generala.png"
+    },
+    "info_erori": [
+        {
+            "identificator": 404,
+            "status": true,
+            "titlu": "404 - Disc Negăsit",
+            "text": "Albumul sau piesa căutată nu face parte din catalogul Musichiosc.",
+            "imagine": "lupa_audio.png"
+        },
+        {
+            "identificator": 403,
+            "status": true,
+            "titlu": "403 - Acces Restricționat",
+            "text": "Nu ai bilet de acces pentru această secțiune privată a showroom-ului.",
+            "imagine": "interzis_hifi.png"
+        },
+        {
+            "identificator": 400,
+            "status": true,
+            "titlu": "400 - Semnal Distorsionat",
+            "text": "Cererea ta a sosit cu zgomot de fond. Verifică datele trimise către server.",
+            "imagine": "semnal_prost.png"
+        },
+        {
+            "identificator": 1,
+            "status": false,
+            "titlu": "Sesiune de Înregistrări",
+            "text": "Muncim la masterizarea acestei pagini. Reveniți după finalizarea mixajului!",
+            "imagine": "in_lucru.png"
+        },
+        {
+            "identificator": 2,
+            "status": false,
+            "titlu": "Eroare Bază de Date",
+            "text": "Serverul nostru de stocare are latențe mari. Reveniți după recalibrare.",
+            "imagine": "eroare_db.png"
+        },
+        {
+            "identificator": 3,
+            "status": false,
+            "titlu": "Date Invalide",
+            "text": "Frecvența datelor introduse nu corespunde standardului nostru Hi-Fi.",
+            "imagine": "warning.png"
+        }
+    ]
+}

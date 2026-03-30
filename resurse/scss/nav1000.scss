@@ -1,0 +1,20 @@
+@media screen and (max-width: 1000px) {
+  ul.meniu {
+    li {
+      width: 65px;
+
+      a {
+        font-size: 0.9rem;
+        
+        .text-nav {
+          display: none;
+        }
+        
+        .imag-icon {
+          display: inline-block;
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+body {
+    --nav-bg: #ffffff;
+    --nav-text: #4A2C38;
+    --nav-accent: #D81B60;
+    --nav-hover: #FCE4EC;
+    --transition-speed: 0.4s;
+}
+
+nav {
+    --inaltime-buton: 45px;
+    --latime-buton: 160px;
+    background-color: var(--nav-accent);
+    height: var(--inaltime-buton);
+}
+
+ul.meniu, ul.meniu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.meniu {
+    display: flex;
+    flex-direction: row;
+}
+
+ul.meniu > li {
+    position: relative;
+    width: var(--latime-buton);
+    height: var(--inaltime-buton);
+    background-color: var(--nav-bg);
+    border: 1px solid var(--nav-accent);
+    text-align: center;
+}
+
+ul.meniu li a {
+    display: block;
+    line-height: var(--inaltime-buton);
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: font-size var(--transition-speed) ease;
+}
+
+ul.meniu li:hover > a {
+    font-size: 1.25rem;
+}
+
+ul.meniu ul {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    width: 200px;
+    background-color: var(--nav-bg);
+    border: 2px solid var(--nav-accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--transition-speed) ease;
+    z-index: 1000;
+}
+
+ul.meniu li:hover > ul {
+    transform: scaleY(1);
+}
+
+ul.meniu ul li {
+    position: relative;
+    height: 40px;
+}
+
+ul.meniu ul li::before, 
+ul.meniu ul li::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 5px;
+    height: 0;
+    background: linear-gradient(to bottom, white, black);
+    transition: height var(--transition-speed) linear;
+}
+
+ul.meniu ul li::before {
+    left: 0;
+}
+
+ul.meniu ul li::after {
+    right: 0;
+}
+
+ul.meniu ul li:hover::before, 
+ul.meniu ul li:hover::after {
+    height: 100%;
+}
+
+#hamburger, #ch-menu {
+    display: none;
+}

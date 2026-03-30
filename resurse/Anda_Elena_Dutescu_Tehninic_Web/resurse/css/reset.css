@@ -1,0 +1,63 @@
+:root {
+    --reset-padding: 0;
+    --reset-margin: 0;
+    --reset-box-sizing: border-box;
+    --reset-font-family: inherit;
+    --list-bullet-color: #8C593B;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: var(--reset-box-sizing);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    padding: var(--reset-padding);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+p, a, span, li, td, th { font-size: 1rem; }
+
+ul, ol {
+    margin: 0rem 0rem 1rem 0rem;
+    padding-left: 2em; 
+}
+
+ul li {
+    list-style-type: square;
+    color: inherit;
+}
+
+ul li::marker {
+    color: var(--list-bullet-color);
+}
+
+b, strong {
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+i, em {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0rem;
+    width: 100%;
+}
