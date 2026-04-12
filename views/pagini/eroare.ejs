@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <%- include('./fragments/head.ejs') %>
+    <title>Musichiosc - Eroare</title>
+    <link rel="stylesheet" type="text/css" href="/resurse/css/eroare.css">
+</head>
+<body>
+    <%- include('./fragments/header.ejs') %>
+
+    <main>
+        <div id="err-coloane" style="display: flex; gap: 2rem; align-items: center; padding: 3rem;">
+            <div id="err-imag" style="flex: 1;">
+                <img src="<%- locals.imagine || '/resurse/imagini/eroare_vinyl.png' %>" alt="Eroare" style="width: 100%;" />
+            </div>
+            <section style="flex: 2;">
+                <h2 style="color: var(--color-main); font-size: 3rem;"><%- locals.titlu || 'Oups! A sărit acul.' %></h2>
+                <p style="font-size: 1.5rem;"><%- locals.text || 'Pagina pe care o cauți nu a putut fi redată. Verifică URL-ul sau revino la catalog.' %></p>
+                <a href="/index" class="taburi-iframe" style="display: inline-block; padding: 10px 20px; text-decoration: none;">Înapoi la Acasă</a>
+            </section>
+        </div>
+    </main>
+    
+    <%- include('./fragments/footer.ejs') %>
+</body>
+</html>

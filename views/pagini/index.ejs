@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <%- include('./fragments/head.ejs') %>
+    <title>Musichiosc - Paradisul Colecționarului de Sunete</title>
+</head>
+
+<body id="pag_sus">
+    <%- include('./fragments/header.ejs') %>
+
+    <main>
+        <div id="grid-pagina">
+
+            <section id="welcome" class="zona-grid">
+                <article>
+                    <hgroup>
+                        <h2>Bun venit în sanctuarul Musichiosc! <i class="fa-solid fa-record-vinyl fa-spin"></i></h2>
+                        <p class="subtitlu">Tradiție și fidelitate în fiecare <b>disc de vinil</b></p>
+                    </hgroup>
+
+                    <figure>
+                        <a href="./resurse/imagini/vinyl2.png" target="_blank">
+                            <picture>
+                                <source srcset="./resurse/imagini/vinyl1.png" media="(max-width:700px)" />
+                                <source srcset="./resurse/imagini/vinyl2.png" media="(max-width:1200px)" />
+                                <img src="./resurse/imagini/vinyl2.png" alt="Vinyl de Colectie" title="Click pentru detalii vinyl2.png" />
+                            </picture>
+                        </a>
+                        <figcaption><b>Piesa lunii: Vinil 180g</b> (Click pe imagine pentru mărire)</figcaption>
+                    </figure>
+
+                    <p class="intro">Vă mulțumim că ați ales Musichiosc. Aici găsiți <b>viniluri asortate de vânzare</b>, păstrate în condiții de arhivă, exact cum merită un audiofil adevărat.</p>
+                    <p class="anunt intro">Livrăm oriunde în țară folosind ambalaje speciale de tip „crash-proof” pentru a proteja colțurile copertelor și integritatea discului în timpul transportului prin curierat rapid.</p>
+                    
+                  <main>  <blockquote cite="https://ro.wikipedia.org/wiki/Friedrich_Nietzsche">
+                        "Fără muzică, viața ar fi o eroare." - Friedrich Nietzsche
+                    </blockquote></main>
+                    
+                    <p>Misiunea noastră este să aducem sunetul cald al analogului în casele tuturor românilor, oferind o selecție riguroasă de artiști, de la hip-hop contemporan la jazz clasic, rock progresiv și muzică electronică de avangardă.</p>
+                </article>
+            </section>
+
+            <section id="zona-tabel" class="zona-grid">
+                <h2>Orarul de Funcționare Musichiosc</h2>
+                <div id="orar-container">
+                    <table id="tab-orar">
+                        <caption>Programul vizitelor la sediul fizic și showroom-ul audio din București</caption>
+                        <thead>
+                            <tr>
+                                <th>Sezon Vizită</th>
+                                <th>Ziua Săptămânii</th>
+                                <th>Interval Dimineață</th>
+                                <th>Pauză Mentenanță</th>
+                                <th>Sesiuni de Audiție</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">Toamnă - Primăvară</td>
+                                <td>Luni - Joi</td>
+                                <td>10:00 - 13:00</td>
+                                <td>13:00 - 14:00</td>
+                                <td>14:00 - 20:00</td>
+                            </tr>
+                            <tr>
+                                <td>Vineri</td>
+                                <td>10:00 - 13:00</td>
+                                <td>- Fără Pauză -</td>
+                                <td>13:00 - 18:00</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Sezon de Vară</td>
+                                <td>Luni - Vineri</td>
+                                <td>09:00 - 12:00</td>
+                                <td>12:00 - 13:00</td>
+                                <td>13:00 - 17:00</td>
+                            </tr>
+                            <tr>
+                                <td>Sâmbătă</td>
+                                <td>10:00 - 14:00</td>
+                                <td>-</td>
+                                <td>Închis</td>
+                            </tr>
+                            <tr>
+                                <td>Weekend Normal</td>
+                                <td>Sâmbătă</td>
+                                <td>11:00 - 14:00</td>
+                                <td>- Fără Pauză -</td>
+                                <td>14:00 - 16:00</td>
+                            </tr>
+                            <tr>
+                                <td>Weekend Normal</td>
+                                <td>Duminică</td>
+                                <td>Închis Vizitatori</td>
+                                <td>-</td>
+                                <td>Doar Online</td>
+                            </tr>
+                            <tr>
+                                <td>Sărbători Legale</td>
+                                <td>Zile Specifice</td>
+                                <td>Închis</td>
+                                <td>Mentenanță Site</td>
+                                <td>Audiții Private</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Comenzile plasate pe site se confirmă automat în maxim 2 ore lucrătoare prin e-mail și SMS!</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section id="calendar" class="zona-grid">
+                <h2>Calendar Evenimente 2026</h2>
+                <p>Urmează lansări noi pe vinil luna viitoare. Pregătește-te pentru sesiuni de audiții speciale în showroom!</p>
+                <ul>
+                    <li><b>15 Aprilie:</b> Lansare album Jazz-Fusion local.</li>
+                    <li><b>22 Mai:</b> Workshop: Întreținerea corectă a pick-up-ului.</li>
+                    <li><b>10 Iunie:</b> Târg de viniluri second-hand în curtea showroom-ului.</li>
+                </ul>
+            </section>
+
+            <section id="anunturi" class="zona-grid">
+                <h2 class="fg-img">Anunțuri Importante</h2>
+                <ul>
+                    <li>
+                        <p><time datetime="2026-03-08T23:34">8 Martie, ora 23:34</time>,
+                        <b>Update Catalog Hip-Hop</b> - Am primit stoc nou pentru albumul DAMN de Kendrick Lamar!</p>
+                    </li>
+                    <li>
+                        <p><time datetime="2026-04-20T10:00">20 Aprilie, ora 10:00</time>,
+                        <b>Ziua Discului (Record Store Day)</b> - Eveniment special cu audiții live și reduceri de până la 30%.</p>
+                    </li>
+                    <li>
+                        <p><time datetime="2026-05-15T12:00">15 Mai, ora 12:00</time>,
+                        <b>Lansare Catalog</b> - Catalogul de vară 2026 este acum disponibil online în format PDF.</p>
+                    </li>
+                    <li>
+                        <p><time datetime="2026-06-01T09:00">1 Iunie, ora 09:00</time>,
+                        <b>Lansare Secțiune Copii</b> - Muzică de poveste pe suport vinyl pentru cei mici, în ediții colorate.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="online" class="zona-grid">
+                <h2>Utilizatori Online</h2>
+                <p><i class="fa-solid fa-users-viewfinder"></i> Momentan 24 audiofili vizionează catalogul online.</p>
+                <p>Cea mai căutată categorie acum: <b>Vinyl Jazz Classics</b>.</p>
+            </section>
+
+            <section id="stats" class="zona-grid">
+                <h2>Statisticile Tale</h2>
+                <p>Ai adăugat 5 discuri în wishlist anul acesta. Continuă să explorezi secțiunea de oferte speciale!</p>
+                <p>Puncte de fidelitate acumulate: <b>150 puncte</b>.</p>
+            </section>
+
+            <section id="server" class="zona-grid">
+                <h2>Date Tehnice Server</h2>
+                <p><i class="fa-solid fa-server"></i> Status: 99.9% uptime.</p>
+                <p>Latentă: 24ms | Securitate SSL activă.</p>
+            </section>
+
+            <section id="diverse" class="zona-grid">
+                <section id="promotii">
+                    <h2>Promoții și Pachete Exclusive</h2>
+                    <article>
+                        <h3 class="titlu">Pachetul Kendrick Classic</h3>
+                        <p><b>Musichiosc</b> oferă o <b>reducere de <s>15%</s> <ins>25%</ins></b> la achiziția albumului <b>Kendrick Lamar - DAMN.</b> împreună cu un set de curățare profesional.</p>
+                        <p>Oferta este valabilă până la sfârșitul săptămânii la produsele marcate cu sigiliul <abbr title="Musichiosc Selected">MS</abbr>.</p>
+                    </article>
+
+                    <article>
+                        <h3>Ofertă "Debut Audiofil"</h3>
+                        <p>Pachetul conține elemente de bază pentru orice începător:</p>
+                        <ol>
+                            <li><i lang="en">Carbon fiber brush</i> (pentru eliminarea prafului static)</li>
+                            <li>Disc de test pentru reglarea forței de apăsare a acului</li>
+                            <li>Un vinil surpriză din categoria "Jazz Classics"</li>
+                            <li>Gratis: O doză de protecție pentru ac</li>
+                            <li>Ghid complet de întreținere a colecției</li>
+                        </ol>
+                    </article>
+                </section>
+
+                <hr>
+
+                <section id="produse">
+                    <h2>Categoriile Noastre de Produse</h2>
+                    <section>
+                        <h3>Muzică pe Suport Analog</h3>
+                        <p>Sunet cald, bogat în armonici, pentru experiențe autentice:</p>
+                        <dl>
+                            <dt>Vinyl 12" (LPs)</dt>
+                            <dd>Formatul standard pentru albume complete de 33 RPM.</dd>
+
+                            <dt>Vinyl 7" (Singles)</dt>
+                            <dd>Discuri mici pentru piese individuale sau ediții promo.</dd>
+
+                            <dt>Ediții Kendrick Lamar</dt>
+                            <dd>Albume hip-hop de referință precum <b>DAMN.</b> sau <b>To Pimp a Butterfly</b>.</dd>
+
+                            <dt>Accesorii Curățare</dt>
+                            <dd>Soluții antistatice și perii dedicate pentru longevitatea acului.</dd>
+                            
+                            <dt>Sisteme Hi-Fi</dt>
+                            <dd>Pick-up-uri moderne și amplificatoare pe lămpi.</dd>
+                        </dl>
+
+                        <p>Scorul de popularitate al magazinului:</p>
+                        <meter value="4.9" min="0" max="5" low="2" high="4" optimum="5">
+                            4.9 din 5 puncte
+                        </meter>
+
+                        <p>Nivelul stocului pentru Ediții Limitate:</p>
+                        <meter value="1.5" min="0" max="10" low="3" high="8" optimum="10">
+                            Stoc Critic!
+                        </meter>
+                    </section>
+                </section>
+
+                <hr>
+
+                <section id="index-intrebari">
+                    <h2>Întrebări Frecvente (FAQ)</h2>
+                    <details>
+                        <summary>Cum pot verifica starea unui vinil second-hand?</summary>
+                        <p>Folosim sistemul internațional de gradare: Mint (M), Near Mint (NM), Very Good Plus (VG+). Fiecare disc este inspectat sub lumină puternică înainte de listare.</p>
+                    </details>
+                    <details>
+                        <summary>Kendrick Lamar - DAMN. este ediția pe vinyl dublu?</summary>
+                        <p>Da, versiunea disponibilă în showroom este ediția Deluxe pe 2 discuri de 180 grame, ambalaj gatefold.</p>
+                    </details>
+                    <details>
+                        <summary>Cum sunt ambalate produsele pentru livrare?</summary>
+                        <p>Folosim cutii de carton cu pereți dubli și straturi protectoare de spumă pentru a preveni orice daună mecanică.</p>
+                    </details>
+                    <details>
+                        <summary>Pot returna un sistem Hi-Fi dacă nu îmi place sunetul?</summary>
+                        <p>Da, conform politicii noastre de satisfacție, aveți 14 zile pentru retur, cu condiția ca produsul să fie în starea originală.</p>
+                    </details>
+                    <details>
+                        <summary>Oferiți servicii de curățare profesională ultrasonică?</summary>
+                        <p>Da, oferim acest serviciu la sediul nostru din București pentru orice tip de disc de vinil.</p>
+                    </details>
+                </section>
+
+                <hr>
+
+                <section id="recenzii">
+                    <h2>Ce spun clienții noștri (Mărturii)</h2>
+                    <article>
+                        <h4>Mihai A. - Colecționar Jazz</h4>
+                        <p>"Am primit <b>vinyl2.png</b> în stare perfectă. Sunetul este incredibil pe noul meu pickup Pro-Ject. Recomand Musichiosc!"</p>
+                    </article>
+                    <article>
+                        <h4>Elena R. - Fan Kendrick</h4>
+                        <p>"Recomand pachetul Kendrick Classic. Expediere rapidă și ambalaj foarte solid, nicio zgârietură pe copertă."</p>
+                    </article>
+                    <article>
+                        <h4>David T. - DJ local</h4>
+                        <p>"Cel mai bun loc din București pentru a găsi noutăți Hip-Hop pe suport analog. Staff-ul este foarte informat."</p>
+                    </article>
+                </section>
+                
+                <hr>
+
+                <section id="echipa">
+                    <h2>Oamenii din spatele Musichiosc</h2>
+                    <ul>
+                        <li><b>Anda Dutescu</b> - Fondator și Selecționer Muzical</li>
+                        <li><b>Adrian M.</b> - Expert Sisteme Hi-Fi și Calibrare</li>
+                        <li><b>Simona P.</b> - Logistică și Ambalare Sigură</li>
+                        <li><b>George V.</b> - Suport Clienți și Comunitate</li>
+                    </ul>
+                </section>
+
+                <hr>
+                <h2>Bonus: Formula Acusticii (MathML)</h2>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                    <mrow class="formula-acustica">
+                        <mi class="mat-variabila">f</mi>
+                        <mo class="mat-operator">=</mo>
+                        <mfrac>
+                            <mi class="mat-numarator">v</mi>
+                            <mi class="mat-numitor">λ</mi>
+                        </mfrac>
+                    </mrow>
+                </math>
+            </section>
+            </div>
+
+        <section id="galerie-imagini">
+            <h2>Galerie Foto Produse</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <section id="fig1" style="flex: 1; min-width: 250px;">
+                    <figure class="fg-img">
+                        <a href="./resurse/imagini/Kendrick_Lamar_damn.png" target="_blank">
+                            <img src="./resurse/imagini/Kendrick_Lamar_damn.png" alt="Kendrick Lamar Damn" width="100%">
+                        </a>
+                        <figcaption>Kendrick Lamar - DAMN. (LP)</figcaption>
+                    </figure>
+                </section>
+
+                <section id="fig2" style="flex: 1; min-width: 250px;">
+                    <figure class="fg-img">
+                        <a href="./resurse/imagini/muzica.png" target="_blank">
+                            <img src="./resurse/imagini/muzica.png" alt="Logo Muzica" width="100%">
+                        </a>
+                        <figcaption>Simbol Muzical Brand</figcaption>
+                    </figure>
+                </section>
+
+                <section id="fig3" style="flex: 1; min-width: 250px;">
+                    <figure class="fg-img">
+                        <a href="./resurse/imagini/vinyl1.png" target="_blank">
+                            <img src="./resurse/imagini/vinyl1.png" alt="Vinyl 1" width="100%">
+                        </a>
+                        <figcaption>Structură Micro-Groove Vinyl 1</figcaption>
+                    </figure>
+                </section>
+            </div>
+        </section>
+
+        <section id="video-demo">
+            <h2>Demonstrații Audio-Video</h2>
+            <p>Vizualizați cum să vă întrețineți echipamentul Hi-Fi direct de la experții noștri.</p>
+            <div class="container-iframe">
+                <div class="taburi-iframe">
+                    <a href="https://www.youtube.com/embed/4fYMjvSl2Fk" target="ifr-video">Instalare Pickup</a>
+                    <a href="https://www.youtube.com/embed/PDGWLkyyKQw" target="ifr-video">Calibrare Braț</a>
+                    <a href="https://www.youtube.com/embed/mwl_cRI1Qpc" target="ifr-video">Curățare Auri-Verde</a>
+                </div>
+                <br>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/tvTRZJ-4EyI" name="ifr-video"
+                    title="YouTube video player Musichiosc" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <section id="playlist">
+            <h2>Playlist-ul Lunii: Selecția Musichiosc</h2>
+            <p>Actualizăm periodic playlist-ul cu noutățile intrate în stoc.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/8xKKgQRtNrw" title="YouTube Playlist" frameborder="0" allowfullscreen></iframe>
+        </section>
+
+        <section id="pdf">
+            <h2>Resurse PDF: Catalog Echipamente 2026</h2>
+            <object data="./resurse/pdf/catalog_musichiosc.pdf" type="application/pdf" width="100%" height="600">
+                <p>Browserul dumneavoastră nu suportă vizualizarea PDF directă. 
+                    <a href="./resurse/pdf/catalog_musichiosc.pdf">Descărcați catalogul aici (PDF, 5.4 MB)</a>
+                </p>
+            </object>
+        </section>
+
+    </main>
+
+    <%- include('./fragments/footer.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:04.000
+welcome to musichiosc!
+
+2
+00:00:05.000 --> 00:00:09.000 line:10%
+this text appears at the top of the screen.
+
+3
+00:00:05.000 --> 00:00:09.000 line:90%
+at the same time, this text appears at the bottom.
+
+4
+00:00:10.000 --> 00:00:15.000
+enjoy the music!

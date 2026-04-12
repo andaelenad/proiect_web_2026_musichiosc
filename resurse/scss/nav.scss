@@ -1,0 +1,110 @@
+/* =========================================
+   task: variante-meniu
+   ========================================= */
+body {
+  --nav-bg: #ffffff;
+  --nav-text: #4a2c38;
+  --nav-accent: #d81b60;
+  --transition-speed: 0.4s;
+}
+
+/* folosim extend pentru a evita codul duplicat la butoane */
+%buton-baza {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--nav-bg);
+  border: 1px solid var(--nav-accent);
+}
+
+nav {
+  background-color: var(--nav-accent);
+  position: relative;
+  z-index: 2000;
+
+  ul.meniu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+
+    /* stilizare optiuni principale */
+    > li {
+      @extend %buton-baza;
+      position: relative;
+      width: 160px;
+      height: 50px;
+
+      a {
+        color: var(--nav-text);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: font-size var(--transition-speed) ease;
+        
+        i { margin-right: 5px; }
+      }
+
+      /* tranzitie crestere text la hover pe meniul principal */
+      &:hover > a {
+        font-size: 1.25rem;
+      }
+
+      /* stilizare submeniu cu scalare pe verticala */
+      ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 220px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: var(--nav-bg);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform var(--transition-speed) ease;
+
+        li {
+          position: relative;
+          height: 40px;
+          border: 1px solid var(--nav-accent);
+          display: flex;
+          align-items: center;
+          padding-left: 10px;
+
+          a { font-size: 0.9rem; }
+
+          /* generarea barelor in degrade la stanga si dreapta */
+          &::before, &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 4px;
+            height: 0; /* incep de la inaltime 0 */
+            background: linear-gradient(to bottom, #ffffff, #000000);
+            transition: height 0.3s ease;
+          }
+
+          &::before { left: 0; }
+          &::after { right: 0; }
+
+          /* barele cresc la hover */
+          &:hover::before, &:hover::after {
+            height: 100%;
+          }
+        }
+      }
+
+      /* deschidem submeniul la hover */
+      &:hover ul {
+        transform: scaleY(1);
+      }
+    }
+  }
+}
+
+/* ascundem checkbox-ul si label-ul pt desktop */
+#ch-menu, #hamburger {
+  display: none;
+}
