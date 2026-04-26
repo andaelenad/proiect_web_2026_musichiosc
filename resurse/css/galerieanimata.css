@@ -1,0 +1,106 @@
+.galerie-animata {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border: 10px solid transparent;
+  border-image: url("/resurse/imagini/1.jpg") 30 round;
+  overflow: hidden;
+  margin: 50px auto;
+  background-color: black;
+  z-index: 10;
+}
+.galerie-animata:hover figure {
+  animation-play-state: paused;
+}
+.galerie-animata figure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  animation: animatie-galerie linear infinite;
+  animation-duration: 12s;
+  opacity: 0;
+}
+.galerie-animata figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@keyframes animatie-galerie {
+  0% {
+    opacity: 0;
+    clip-path: inset(50% 0 50% 0);
+  }
+  5% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+  25% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+  30% {
+    opacity: 0;
+    clip-path: inset(50% 0 50% 0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.galerie-animata .galerie-animata figure:nth-of-type(1) {
+  animation-delay: 0s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(2) {
+  animation-delay: 3s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(3) {
+  animation-delay: 6s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(4) {
+  animation-delay: 9s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(5) {
+  animation-delay: 12s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(6) {
+  animation-delay: 15s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(7) {
+  animation-delay: 18s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(8) {
+  animation-delay: 21s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(9) {
+  animation-delay: 24s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(10) {
+  animation-delay: 27s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(11) {
+  animation-delay: 30s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(12) {
+  animation-delay: 33s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(13) {
+  animation-delay: 36s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(14) {
+  animation-delay: 39s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(15) {
+  animation-delay: 42s;
+}
+.galerie-animata .galerie-animata figure:nth-of-type(16) {
+  animation-delay: 45s;
+}
+@media (max-width: 1000px) {
+  .galerie-animata .galerie-animata {
+    width: 300px;
+    height: 200px;
+  }
+}

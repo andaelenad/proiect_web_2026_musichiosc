@@ -1,0 +1,30 @@
+<%- include("../fragments/header.ejs") %>
+
+<main>
+    <section class="galerie-animata">
+        <% imaginiAnimatie.forEach(function(img) { %>
+            <figure>
+                <img src="<%= img.fisier %>" alt="<%= img.alt || img.titlu %>">
+            </figure>
+        <% }); %>
+    </section>
+
+    <hr class="hr-special">
+
+    <section id="galerie-statica">
+        <div class="grid-galerie">
+            <% imagini.forEach(function(img) { %>
+                <figure title="<%= img.descriere %>" class="item-galerie">
+                    <picture>
+                        <img src="<%= img.fisier %>" alt="<%= img.alt || img.titlu %>">
+                    </picture>
+                    <figcaption>
+                        <span class="index-alfabetic"></span> <%= img.titlu %>
+                    </figcaption>
+                </figure>
+            <% }); %>
+        </div>
+    </section>
+</main>
+
+<%- include("../fragments/footer.ejs") %>

@@ -1,0 +1,417 @@
+:root {
+    --color-main: #D81B60;      
+    --color-bg-light: #FCE4EC;   
+    --color-bg-dark: #2C1A22;    
+    --color-text: #4A2C38;      
+    --color-highlight: #FF4081;  
+    --color-border: #F48FB1;
+
+    --spatiu-lateral: 10vw;
+    --spatiu-box: 1.5rem;
+    --gap-grid: 1.5rem;
+}
+
+html { transition: font-size 0.5s ease; }
+
+body {
+    padding-left: var(--spatiu-lateral);
+    padding-right: var(--spatiu-lateral);
+    background-color: var(--color-bg-light);
+    color: var(--color-text);
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--color-main); }
+
+img, video, iframe {
+    width: 100%;
+    max-width: 800px;
+    min-width: 250px;
+    height: auto;
+}
+
+header, footer, .zona-grid {
+    background-color: #ffffff;
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.08);
+    padding: var(--spatiu-box);
+}
+
+#welcome {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+#welcome hgroup { width: 100%; text-align: left; }
+#welcome .intro { width: 50%; text-align: left; }
+#welcome figure { width: 45%; text-align: right; }
+
+#grid-pagina {
+    display: grid;
+    gap: var(--gap-grid);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "z1 z1 z1 z1"
+        "z2 z2 z8 z8"
+        "z3 z6 z8 z8"
+        "z5 z6 z8 z8"
+        "z4 z4 z4 z7";
+    margin-bottom: 2rem;
+}
+
+#welcome    { grid-area: z1; } 
+#zona-tabel { grid-area: z2; } 
+#calendar   { grid-area: z3; } 
+#anunturi   { grid-area: z4; } 
+#online     { grid-area: z5; } 
+#stats      { grid-area: z6; } 
+#server     { grid-area: z7; } 
+#diverse    { grid-area: z8; } 
+
+@media screen and (max-width: 1024px) {
+    html { font-size: 15px; } 
+    :root { --spatiu-lateral: 5vw; --gap-grid: 1.2rem; }
+    #grid-pagina {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "z1 z1"
+            "z2 z2"
+            "z3 z6"
+            "z5 z6"
+            "z8 z8"
+            "z4 z7";
+    }
+}
+
+@media screen and (max-width: 600px) {
+    html { font-size: 13px; } 
+    :root { --spatiu-lateral: 2vw; }
+    #grid-pagina { display: block; }
+    .zona-grid { margin-bottom: var(--gap-grid); }
+    * { animation: none !important; }
+}
+
+#orar-container { overflow-x: auto; }
+
+#tab-orar {
+    border: 5px inset var(--color-border);
+    margin-top: 10px;
+}
+#tab-orar caption { caption-side: bottom; font-style: italic; color: var(--color-text); }
+#tab-orar th, #tab-orar td { border: 1px solid var(--color-text); padding: 10px; text-align: center; }
+
+#tab-orar tbody tr:nth-child(odd) td {
+    background-color: var(--color-bg-light);
+}
+#tab-orar tbody tr:nth-child(even) td {
+    background-color: #ffffff;
+}
+
+#tab-orar tbody tr {
+    transition: outline 0.5s ease;
+    outline: 5px solid transparent; 
+}
+#tab-orar tbody tr:hover {
+    outline: 5px solid rgba(217, 119, 54, 0.7);
+    position: relative; 
+    z-index: 10;
+}
+
+/* =========================================
+   task: stilizare taburi iframe
+   ========================================= */
+.container-iframe {
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-start;
+    padding: 20px;
+    gap: 0; 
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+iframe[name="ifr-video"] { 
+    flex-grow: 1; 
+    height: 450px; 
+    border: 4px solid var(--color-text); 
+    background-color: #ffffff;
+}
+
+.taburi-iframe {
+    display: flex;
+    flex-direction: column; 
+    margin-top: 30px; 
+}
+
+.taburi-iframe a {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    width: 120px; 
+    height: 50px;
+    background-color: var(--color-bg-dark); 
+    color: #fff;
+    text-decoration: none; 
+    font-weight: bold;
+    border: 4px solid var(--color-text); 
+    border-left: none; 
+    margin-bottom: 15px; 
+    transition: background-color 0.3s;
+}
+
+.taburi-iframe a:hover { 
+    background-color: var(--color-main); 
+}
+
+@media screen and (max-width: 768px) {
+    .container-iframe {
+        flex-direction: column;
+        align-items: center;
+    }
+    .taburi-iframe {
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+    .taburi-iframe a {
+        border-left: 4px solid var(--color-text); 
+        margin: 5px;
+    }
+}
+
+.formula-acustica {
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--color-bg-light);
+    border-radius: 8px;
+    border: 1px dashed var(--color-main);
+}
+.mat-variabila {
+    color: var(--color-highlight);
+    font-style: italic;
+    font-weight: bold;
+}
+.mat-operator {
+    color: var(--color-text);
+    margin: 0 0.5rem;
+}
+.mat-numarator { color: var(--color-main); font-weight: bold; }
+.mat-numitor { color: var(--color-border); font-style: italic; }
+
+#link-top {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 55px; height: 55px;
+    background-color: var(--color-bg-dark);
+    border: 2px solid var(--color-main);
+    border-radius: 50% 10px 10px 10px;
+    box-shadow: inset 8px 8px 15px rgba(255, 255, 255, 0.2), 3px 3px 8px rgba(0,0,0,0.5);
+    transform: rotate(45deg);
+    opacity: 0.6;
+    transition: opacity 0.4s ease, background-color 0.4s ease;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; z-index: 9999;
+}
+#sageata-top {
+    transform: rotate(-45deg);
+    color: var(--color-main);
+    font-size: 26px; font-weight: bold;
+    transition: transform 0.4s ease, color 0.4s ease;
+}
+#link-top:hover {
+    opacity: 1;
+    background-color: var(--color-highlight);
+}
+#link-top:hover #sageata-top {
+    transform: rotate(-45deg) scale(1.4);
+    color: #fff;
+}
+
+/* =========================================
+   task: stilizare linkuri
+   ========================================= */
+
+/* culoarea linkurilor vizitate */
+a:visited {
+    color: var(--color-text);
+}
+
+/* selectam linkurile externe (incep cu http) din tot site-ul */
+a[href^="http"]::before {
+    content: "\2B73"; 
+    font-size: 1.5em; 
+    margin-right: 5px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+/* la hover pe link extern, schimbam doar culoarea simbolului */
+a[href^="http"]:hover::before {
+    color: var(--color-main);
+}
+
+/* efectul de pata de culoare la hover pentru linkurile din main (fara meniu) */
+main a {
+    position: relative;
+    text-decoration: none;
+    padding: 2px 6px;
+    border: 2px solid transparent; 
+    border-radius: 5px;
+    
+    background-image: radial-gradient(circle, var(--color-border) 0%, var(--color-border) 40%, transparent 80%, transparent 100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0% 0%; 
+    transition: background-size 0.4s ease;
+}
+
+/* la trecerea cursorului pata creste la 100% */
+main a:hover {
+    background-size: 100% 100%;
+}
+
+/* la click apare borderul */
+main a:active {
+    border: 2px solid var(--color-main);
+}
+
+
+/* =========================================
+   task: video si vtt
+   ========================================= */
+
+/* latime in procentaje, limitata la un minim si maxim pe ecran */
+#video-prezentare {
+    width: 80%;
+    min-width: 300px;
+    max-width: 800px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+/* stilizarea textului din vtt */
+::cue {
+    background-color: transparent; 
+    color: #ffffff; 
+    text-shadow: 2px 2px 4px #000000, -2px -2px 4px #000000; 
+    font-size: 1.2rem;
+}
+
+
+/* =========================================
+   task: css-printare (modificat pentru noile cerinte)
+   ========================================= */
+
+/* ascundem watermark-ul pe ecrane normale, el apare doar pe hartie */
+#watermark-print {
+    display: none;
+}
+
+@media print {
+    /* marginile paginilor in functie de paritate */
+    @page :left {
+        margin-left: 3cm;
+        margin-right: 1cm;
+    }
+    @page :right {
+        margin-left: 1cm;
+        margin-right: 3cm;
+    }
+
+    /* ascundem mediile si alte elemente */
+    img, video, iframe, object, picture, source, canvas, 
+    figure figcaption, #link-top, #hamburger {
+        display: none !important;
+    }
+
+    /* transformam gridul in block pt a evita sectionarea */
+    #grid-pagina, .zona-grid {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+
+    /* culori reseteate pt economie tus */
+    body, main, header, .zona-grid {
+        background-color: transparent !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        border: 1px solid #cccccc !important;
+    }
+
+    h1, h2, h3, p, span, div {
+        color: #000000 !important;
+    }
+
+    /* linkurile devin text normal */
+    a {
+        color: #000000 !important;
+        text-decoration: none !important;
+    }
+
+    /* formatarea primelor elemente: h1 centrat si meniul ca lista */
+    header h1 {
+        text-align: center;
+        page-break-after: avoid;
+    }
+
+    nav ul.meniu {
+        display: block !important;
+        text-align: left;
+    }
+
+    nav ul.meniu > li {
+        display: block !important;
+        border: none !important;
+    }
+
+    /* ascundem submeniurile total la print */
+    nav ul.meniu ul {
+        display: none !important;
+    }
+
+    /* page breaks inainte si dupa sectiuni */
+    nav {
+        page-break-after: always !important;
+    }
+
+    footer {
+        page-break-before: always !important;
+    }
+
+    /* bannerul la sfarsitul primei pagini */
+    #banner-proiect {
+        display: block !important;
+        position: absolute;
+        top: 25cm; 
+        left: 15%;
+        width: 70%;
+        border: 4px inset #000000;
+        text-align: center;
+        padding: 10px;
+        background-color: white;
+    }
+
+    /* watermark-ul pe fiecare pagina */
+    #watermark-print {
+        display: block;
+        position: fixed; 
+        bottom: 0;
+        right: 0;
+        width: 4cm;
+        height: 1cm;
+        border: 3px solid #000000;
+        border-radius: 5px;
+        opacity: 0.4;
+        text-align: center;
+        font-weight: bold;
+        font-size: 10px; 
+        line-height: 1.2;
+        padding-top: 2px;
+        box-sizing: border-box;
+    }
+}

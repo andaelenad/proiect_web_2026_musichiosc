@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <meta name="description" content="Musichiosc oferă CD-uri, vinyl-uri și albume de colecție cu opțiunea de achiziție online.">
+        <meta name="keywords" content="CD, muzica, vinyl, magazin muzica, albume, artisti, Musichiosc">
+        <link rel="stylesheet" href="/Resurse/CSS/produse.css" type="text/css" />
+        <title>Musichiosc - Produse (CD-uri)</title>
+        
+        <%- include("../fragments/head.ejs") %>     
+        
+        <script type="text/javascript" src="/Resurse/js/produse.js"></script>
+        <script type="text/javascript" src="/Resurse/js/produse-cos.js"></script>
+    </head>
+    <body>
+
+    <%- include("../fragments/header.ejs") %>
+
+    <main>
+        <div class="filtre-container">
+            <label> Căutare Album/Artist: <input type="text" id="inp-nume"></label>
+            
+            <div> Anul lansării:
+                <p><label>Classic (Înainte de 2000)
+                    <input id="i_rad1"  name="gr_rad" value="0:1999" type="radio"/>
+                </label></p>
+                <p><label>Anii 2000s (2000 - 2010)
+                    <input id="i_rad2"  name="gr_rad" value="2000:2010" type="radio"/>
+                </label></p>
+                <p><label>Modern (După 2010)
+                    <input id="i_rad3" name="gr_rad" value="2011:3000" type="radio"/>
+                </label></p>
+                <p><label>Toate perioadele
+                    <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
+                </label></p>
+            </div>
+
+            <label> Preț minim: <input type="range" id="inp-pret" value="0" min="0" max="250"> <span id="infoRange">(0) Lei</span></label>
+            
+            <label>Gen muzical:
+                <select id="inp-categorie">
+                    <option id="sel-toate" selected value="toate">Toate genurile</option>
+                    <option value="Rap">Rap</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Electronic">Electronic</option>
+                    <option value="Reggae">Reggae</option>
+                </select>
+            </label>
+
+            <p>
+                <button class="c1 c2 c3" id="filtrare">Filtrează</button> 
+                <button id="resetare">Resetează</button><br/>
+                <button id="sortCrescNume">Sortează crescător (preț și nume)</button>
+                <button id="sortDescrescNume">Sortează descrescător (preț și nume)</button>
+            </p>
+          
+            <p id="p-suma">Apăsați Alt+"c" pentru suma prețurilor produselor afișate.</p>
+        </div>
+    <div class="reflexie-wrapper">
+        <h1 class="text-original">Musichiosc Gallery</h1>
+        <h1 class="text-reflexie">Musichiosc Gallery</h1>
+    </div>
+<section class="duotone-section">
+    <h2>Efect Duotone</h2>
+    <div class="duotone-box"></div>
+</section>
+    <hr class="hr-special">
+<div class="duotone-box"></div>
+    <section id="galerie-statica">
+        <div class="grid-galerie">
+            <% if (locals.imaginiGalerie) { %>
+                <% imaginiGalerie.forEach(function(img) { %>
+                    <figure title="<%= img.descriere %>" class="item-galerie">
+                        <picture>
+                            <source srcset="<%= cale_galerie %>/mic-<%= img.cale_imagine %>" media="(max-width: 700px)">
+                            <source srcset="<%= cale_galerie %>/mediu-<%= img.cale_imagine %>" media="(max-width: 1000px)">
+                            <img src="<%= cale_galerie %>/<%= img.cale_imagine %>" alt="<%= img.alt || img.cale_imagine %>">
+                        </picture>
+                        <figcaption>
+                            <span class="index-alfabetic"></span> <%= img.titlu %>
+                        </figcaption>
+                    </figure>
+                <% }); %>
+            <% } %>
+        </div>
+    </section>
+    <section class="galerie-animata">
+    <% if (locals.imaginiAnimatie && imaginiAnimatie.length > 0) { %>
+        <% imaginiAnimatie.forEach(function(img) { %>
+            <figure>
+                <img src="<%= img.fisier %>" alt="imagine">
+            </figure>
+        <% }); %>
+    <% } else { %>
+        <p>Nu sunt imagini pentru animație.</p>
+    <% } %>
+</section>
+
+    <hr class="hr-special">
+
+    <div class="filtre-container">
+        </div>
+    
+
+        <section id="produse">
+            <h2 class="reflexie">Colecția de CD-uri</h2>
+            <div class="grid-produse">
+                <% if (locals.produse && locals.produse.length > 0) { %>
+                    <% for( let prod of locals.produse) { %>
+                        <article class="produs">
+                            <h3 class="nume">Album: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume %></span></a></h3>
+                            
+                            <div class="info-prod">
+                                <p class="artist">Artist: <span class="val-artist"><%- prod.artist %></span></p>
+                                <p class="pret">Preț: <span class="val-pret"><%- prod.pret %></span> Lei</p>
+                                <p class="an-lansare">An lansare: <span class="val-an"><%- prod.an_lansare %></span></p>
+                            </div>
+                            
+                            <p class="categorie">Gen muzical: <span class="val-categorie"><%- prod.categorie %></span></p>
+                            
+                            <figure>
+                                <a href="/produs/<%-prod.id %>">
+                                    <img src="<%- prod.fisier %>" style="width:100%; max-width:200px; height:auto;" alt="<%- prod.continut_alternativ %>" />
+                                </a>
+                            </figure>
+                            
+                            <label class="selecteaza-cos">
+                                Selectează:<br/>
+                                <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                            </label>
+                        </article>
+                    <% } %>
+                <% } else { %>
+                    <p>Nu există CD-uri disponibile momentan.</p>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <%- include("../fragments/footer.ejs") %>
+    
+    </body>
+</html>

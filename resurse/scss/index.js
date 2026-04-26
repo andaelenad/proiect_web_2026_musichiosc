@@ -1,133 +1,116 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const sass = require('sass');
+const sharp = require('sharp');
+
 const app = express();
 
-// afisare cai cerute in cerinta
-console.log("calea folderului (__dirname): " + __dirname);
-console.log("calea fisierului (__filename): " + __filename);
-console.log("folderul curent de lucru (cwd): " + process.cwd());
-
-// setare ejs ca motor de template-uri
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// definirea folderului static resurse
 app.use('/resurse', express.static(path.join(__dirname, 'resurse')));
+app.use("/dist", express.static(path.join(__dirname, "/node_modules/bootstrap/dist")));
 
-// creare automata foldere necesare la pornire
-const vect_foldere = ["temp", "logs", "backup", "fisiere_uploadate"];
+const vect_foldere = ["temp", "logs", "backup", "fisiere_uploadate", path.join("backup", "resurse", "css")];
 for (let folder of vect_foldere) {
     let caleFolder = path.join(__dirname, folder);
     if (!fs.existsSync(caleFolder)) {
-        fs.mkdirSync(caleFolder);
+        fs.mkdirSync(caleFolder, { recursive: true });
     }
 }
 
-// variabila globala ceruta
-let obGlobal = {
-    obErori: null
-};
+global.folderScss = path.join(__dirname, 'resurse', 'scss');
+global.folderCss = path.join(__dirname, 'resurse', 'css');
+const folderBackupCss = path.join(__dirname, 'backup', 'resurse', 'css');
 
+function compileazaScss(caleScss, caleCss) {
+    if (!path.isAbsolute(caleScss)) caleScss = path.join(global.folderScss, caleScss);
+    
+    let numeFisierCss;
+    if (!caleCss) {
+        let baza = path.basename(caleScss, '.scss');
+        numeFisierCss = baza + '.css';
+        caleCss = path.join(global.folderCss, numeFisierCss);
+    } else {
+        if (!path.isAbsolute(caleCss)) caleCss = path.join(global.folderCss, caleCss);
+        numeFisierCss = path.basename(caleCss);
+    }
+
+    try {
+        if (fs.existsSync(caleCss)) {
+            let timp = new Date().getTime();
+            let numeBackup = numeFisierCss.replace('.css', `_${timp}.css`);
+            let caleBackup = path.join(folderBackupCss, numeBackup);
+            fs.copyFileSync(caleCss, caleBackup);
+        }
+        let rezultat = sass.compile(caleScss);
+        fs.writeFileSync(caleCss, rezultat.css);
+    } catch (err) {
+        console.error(`Eroare SCSS la ${caleScss}:`, err.message);
+    }
+}
+
+if (fs.existsSync(global.folderScss)) {
+    let fisiere = fs.readdirSync(global.folderScss);
+    for (let f of fisiere) {
+        if (f.endsWith('.scss')) compileazaScss(f);
+    }
+    fs.watch(global.folderScss, (eventType, filename) => {
+        if (filename && filename.endsWith('.scss')) compileazaScss(filename);
+    });
+}
+
+let dateGalerie = null;
+const caleJsonGalerie = path.join(__dirname, 'resurse', 'json', 'galerie.json');
+
+function initImagini() {
+    if (fs.existsSync(caleJsonGalerie)) {
+        try {
+            dateGalerie = JSON.parse(fs.readFileSync(caleJsonGalerie, 'utf8'));
+            let caleAbsolutaGalerie = path.join(__dirname, dateGalerie.cale_galerie);
+
+            if (fs.existsSync(caleAbsolutaGalerie)) {
+                let caleMic = path.join(caleAbsolutaGalerie, 'mic');
+                let caleMediu = path.join(caleAbsolutaGalerie, 'mediu');
+                if (!fs.existsSync(caleMic)) fs.mkdirSync(caleMic);
+                if (!fs.existsSync(caleMediu)) fs.mkdirSync(caleMediu);
+
+                for (let img of dateGalerie.imagini) {
+                    let caleImagine = path.join(caleAbsolutaGalerie, img.fisier_imagine);
+                    if (fs.existsSync(caleImagine)) {
+                        let caleImagineMica = path.join(caleMic, img.fisier_imagine);
+                        let caleImagineMedie = path.join(caleMediu, img.fisier_imagine);
+                        if (!fs.existsSync(caleImagineMedie)) sharp(caleImagine).resize(400).toFile(caleImagineMedie);
+                        if (!fs.existsSync(caleImagineMica)) sharp(caleImagine).resize(200).toFile(caleImagineMica);
+                    }
+                    img.fisier = path.join('/', dateGalerie.cale_galerie, img.fisier_imagine);
+                }
+            }
+        } catch (e) { console.error("Eroare JSON galerie:", e); }
+    }
+}
+initImagini();
+
+let obGlobal = { obErori: null };
 function initErori() {
     let caleJson = path.join(__dirname, 'erori.json');
-    
-    // bonus 1: nu exista fisierul
-    if (!fs.existsSync(caleJson)) {
-        console.error("eroare critica: nu exista fisierul erori.json. serverul se va opri.");
-        process.exit();
-    }
-
-    // citim fisierul ca string brut pentru bonusul cu verificarea pe string
-    let dateString = fs.readFileSync(caleJson, 'utf-8');
-
-    // bonus 6: verificare proprietate duplicata folosind string-ul
-    let regexBlocuri = /\{([^{}]*)\}/g;
-    let match;
-    while ((match = regexBlocuri.exec(dateString)) !== null) {
-        let bloc = match[1];
-        let regexChei = /"([^"]+)"\s*:/g;
-        let cheiGasite = [];
-        let matchCheie;
-        while ((matchCheie = regexChei.exec(bloc)) !== null) {
-            cheiGasite.push(matchCheie[1]);
-        }
-        
-        let cheiUnice = new Set(cheiGasite);
-        if (cheiGasite.length !== cheiUnice.size) {
-            console.error("eroare bonus string: ai o proprietate declarata de mai multe ori in acelasi obiect json!");
-        }
-    }
-
-    // parsam json-ul
-    let erori = JSON.parse(dateString);
-
-    // bonus 2: lipsesc proprietatile principale
-    if (!erori.info_erori || !erori.cale_baza || !erori.eroare_default) {
-        console.error("eroare: lipseste info_erori, cale_baza sau eroare_default din json.");
-        process.exit();
-    }
-
-    // bonus 3: lipsesc proprietati in eroarea default
-    if (!erori.eroare_default.titlu || !erori.eroare_default.text || !erori.eroare_default.imagine) {
-        console.error("eroare: eroare_default nu are toate proprietatile (titlu, text, imagine).");
-        process.exit();
-    }
-
-    // bonus 4: folderul cale_baza nu exista
-    let folderBaza = path.join(__dirname, erori.cale_baza);
-    if (!fs.existsSync(folderBaza)) {
-        console.error("eroare: folderul specificat in cale_baza (" + erori.cale_baza + ") nu exista.");
-        process.exit();
-    }
-
-    // bonus 7: identificatori duplicati (am folosit id_uri cu underscore aici)
-    let id_uri = erori.info_erori.map(e => e.identificator);
-    let id_uriUnice = new Set(id_uri);
-    if (id_uri.length !== id_uriUnice.size) {
-        console.error("eroare bonus: ai pus mai multe erori cu acelasi identificator in vectorul info_erori!");
-        let duplicate = id_uri.filter((item, index) => id_uri.indexOf(item) !== index);
-        for(let idDuplicat of duplicate) {
-            let eroriGresite = erori.info_erori.filter(e => e.identificator === idDuplicat);
-            console.error(`  -> elemente cu id ${idDuplicat}:`, eroriGresite.map(e => ({ titlu: e.titlu, text: e.text })));
-        }
-    }
-
-    // setam căile pentru imagini
+    if (!fs.existsSync(caleJson)) { process.exit(); }
+    let erori = JSON.parse(fs.readFileSync(caleJson, 'utf-8'));
     for (let eroare of erori.info_erori) {
-        let numeImagine = eroare.imagine;
-        eroare.imagine = path.join('/', erori.cale_baza, numeImagine);
-        
-        let caleFizicaPoza = path.join(__dirname, erori.cale_baza, numeImagine);
-        if(!fs.existsSync(caleFizicaPoza)) {
-            console.error(`eroare bonus: imaginea ${caleFizicaPoza} pentru eroarea ${eroare.identificator} nu exista pe disc!`);
-        }
+        eroare.imagine = path.join('/', erori.cale_baza, eroare.imagine);
     }
-    
     erori.eroare_default.imagine = path.join('/', erori.cale_baza, erori.eroare_default.imagine);
     obGlobal.obErori = erori;
 }
-
 initErori();
 
 function afisareEroare(res, identificator, titlu, text, imagine) {
-    let eroare = obGlobal.obErori.info_erori.find(e => e.identificator === identificator);
-    if (!eroare) {
-        eroare = obGlobal.obErori.eroare_default;
-    }
-    
-    let titluFinal = titlu || eroare.titlu;
-    let textFinal = text || eroare.text;
-    let imagineFinala = imagine || eroare.imagine;
-
-    if (eroare.status) {
-        res.status(identificator ? identificator : 500);
-    }
-
-    res.render('pagini/eroare', {
-        titlu: titluFinal,
-        text: textFinal,
-        imagine: imagineFinala
+    let eroare = obGlobal.obErori.info_erori.find(e => e.identificator === identificator) || obGlobal.obErori.eroare_default;
+    res.status(identificator || 500).render('pagini/eroare', {
+        titlu: titlu || eroare.titlu,
+        text: text || eroare.text,
+        imagine: imagine || eroare.imagine
     });
 }
 
@@ -135,38 +118,65 @@ app.get('/favicon.ico', (req, res) => {
     res.sendFile(path.join(__dirname, 'resurse/imagini/favicon/favicon.ico'));
 });
 
-app.get('^/*.ejs$', (req, res) => {
-    afisareEroare(res, 400);
-});
-
-app.get('/resurse/*', (req, res, next) => {
-    let caleFisier = path.join(__dirname, req.path);
-    if (fs.existsSync(caleFisier) && fs.statSync(caleFisier).isDirectory()) {
-        afisareEroare(res, 403);
-    } else {
-        next(); 
-    }
-});
-
 app.get(['/', '/index', '/home'], (req, res) => {
     res.render('pagini/index', { ip: req.ip });
+});
+
+app.get("/produse", function(req, res) {
+    if (!dateGalerie) return afisareEroare(res, 500);
+
+    let toateImaginile = dateGalerie.imagini;
+    let imaginiPare = toateImaginile.filter((img, idx) => idx % 2 === 0);
+    let puteri = [2, 4, 8, 16];
+    let nrAleator = puteri[Math.floor(Math.random() * puteri.length)];
+    let imaginiAnimatie = imaginiPare.slice(0, nrAleator);
+
+    let acum = new Date();
+    let oraCurenta = acum.getHours().toString().padStart(2, '0') + ":" + acum.getMinutes().toString().padStart(2, '0');
+
+    let imaginiStatice = toateImaginile.filter(img => {
+        if (img && typeof img.timp === "string") {
+            let parti = img.timp.split("-");
+            if (parti.length === 2) {
+                return oraCurenta >= parti[0] && oraCurenta <= parti[1];
+            }
+        }
+        return false;
+    }).slice(0, 10);
+
+    res.render("pagini/produse", {
+        produse: toateImaginile,
+        imaginiStatice: imaginiStatice,
+        imaginiAnimatie: imaginiAnimatie,
+        cale_galerie: dateGalerie.cale_galerie,
+        optiuni: [{ unnest: "Rap" }, { unnest: "Rock" }, { unnest: "Pop" }, { unnest: "Jazz" }, { unnest: "Electronic" }, { unnest: "Reggae" }]
+    });
+});
+
+app.get('/produs/:id', (req, res) => {
+    let idCautat = parseInt(req.params.id);
+    let produs = dateGalerie.imagini.find(p => p.id === idCautat);
+    if (produs) res.render('pagini/produs', { prod: produs });
+    else afisareEroare(res, 404);
+});
+
+app.get('^/*.ejs$', (req, res) => afisareEroare(res, 400));
+app.get('/resurse/*', (req, res, next) => {
+    let caleFisier = path.join(__dirname, req.path);
+    if (fs.existsSync(caleFisier) && fs.statSync(caleFisier).isDirectory()) afisareEroare(res, 403);
+    else next();
 });
 
 app.get('/*', (req, res) => {
     let pagina = req.params[0];
     res.render('pagini/' + pagina, { ip: req.ip }, function(err, html) {
         if (err) {
-            if (err.message.startsWith("Failed to lookup view")) {
-                afisareEroare(res, 404);
-            } else {
-                afisareEroare(res);
-            }
-        } else {
-            res.send(html);
-        }
+            if (err.message.startsWith("Failed to lookup view")) afisareEroare(res, 404);
+            else afisareEroare(res);
+        } else res.send(html);
     });
 });
 
 app.listen(8080, () => {
-    console.log("serverul a pornit impecabil pe portul 8080!");
+    console.log("Serverul a pornit la http://localhost:8080");
 });

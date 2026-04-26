@@ -1,0 +1,29 @@
+$fundal-pagina: #C0DB7F;   
+$contur-inchis: #557226;    
+$text-inchis: #273635;      
+$special-gri: #4e5650;    
+
+@use '../../node_modules/bootstrap/scss/bootstrap.scss' with (
+    $primary: $contur-inchis,
+    $secondary: $special-gri,
+    $body-bg: $fundal-pagina,
+    $body-color: $text-inchis,
+    $font-family-base: ('Noto Sans', sans-serif),
+    $grid-breakpoints: (
+        xs: 0,
+        sm: 700px,
+        md: 1000px,
+        lg: 1200px,
+        xl: 1400px,
+        xxl: 1600px
+    ),
+    $border-radius: 20px,
+    $border-radius-lg: 50px,
+    $h1-font-size: 4.5rem,
+    $h2-font-size: 3rem, 
+    $btn-font-weight: 700
+);
+
+.btn-primary, .btn-secondary {
+    color: #ffffff !important;
+}
