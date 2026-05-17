@@ -1,81 +1,90 @@
 @media screen and (max-width: 700px) {
-  @keyframes animatieLinii {
+  @keyframes animatieLiniiComplexa {
     0% {
+      background-color: paleturquoise;
+      transform: scale(0.5) rotate(0deg);
       opacity: 0;
-      transform: scale(0.5) translateX(-20px);
-      background-color: blue;
     }
     50% {
+      background-color: #ffeb3b;
       opacity: 0.5;
-      transform: scale(1.1) translateX(5px);
-      background-color: #FF4081;
     }
     100% {
+      background-color: white;
+      transform: scale(1) rotate(360deg);
       opacity: 1;
-      transform: scale(1) translateX(0);
-      background-color: #D81B60;
     }
   }
   #hamburger {
-    display: block;
-    cursor: pointer;
-    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
     width: 35px;
     height: 25px;
+    z-index: 2005;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
   }
   #hamburger span {
-    position: absolute;
-    left: 0;
+    display: block;
     width: 100%;
     height: 4px;
+    background-color: white;
     border-radius: 2px;
-    opacity: 0;
-    animation: animatieLinii 0.6s ease forwards;
+    animation: animatieLiniiComplexa 0.8s ease forwards;
   }
   #hamburger span:nth-child(1) {
-    top: 0px;
+    animation-delay: 0s;
   }
   #hamburger span:nth-child(2) {
-    top: 10px;
+    animation-delay: 0.3s;
   }
   #hamburger span:nth-child(3) {
-    top: 20px;
+    animation-delay: 0.6s;
   }
-  #hamburger span:nth-child(1) {
-    animation-delay: 300ms;
-  }
-  #hamburger span:nth-child(2) {
-    animation-delay: 600ms;
-  }
-  #hamburger span:nth-child(3) {
-    animation-delay: 900ms;
-  }
-  ul.meniu {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 100%;
-    background-color: var(--menu-accent);
+  nav ul.meniu {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: var(--nav-accent) !important;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform var(--transition-speed) ease-in-out;
-    z-index: 2000;
+    transition: transform 0.4s ease-in-out;
+    visibility: hidden;
+    z-index: 2004;
   }
-  ul.meniu li:first-child a .text-nav {
-    display: none;
+  nav ul.meniu li {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
   }
-  ul.meniu li:first-child a::before {
+  nav ul.meniu li a {
+    padding: 15px !important;
+    color: white !important;
+  }
+  nav ul.meniu li ul.submeniu {
+    position: static !important;
+    display: block !important;
+    transform: none !important;
+    visibility: visible !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  nav ul.meniu > li:first-child > a .text-nav, nav ul.meniu > li:first-child > a i {
+    display: none !important;
+  }
+  nav ul.meniu > li:first-child > a::before {
     font-family: "Font Awesome 6 Free";
     content: "\f015";
     font-weight: 900;
     font-size: 1.8rem;
     color: white;
   }
-  ul.meniu li {
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  #ch-menu:checked + ul.meniu {
-    transform: scaleX(1);
+  #ch-menu:checked ~ ul.meniu {
+    transform: scaleX(1) !important;
+    visibility: visible !important;
   }
 }

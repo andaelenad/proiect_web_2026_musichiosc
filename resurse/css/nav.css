@@ -1,6 +1,3 @@
-/* =========================================
-   task: variante-meniu
-   ========================================= */
 body {
   --nav-bg: #ffffff;
   --nav-text: #4a2c38;
@@ -8,7 +5,6 @@ body {
   --transition-speed: 0.4s;
 }
 
-/* folosim extend pentru a evita codul duplicat la butoane */
 nav ul.meniu > li {
   display: flex;
   align-items: center;
@@ -20,15 +16,15 @@ nav ul.meniu > li {
 nav {
   background-color: var(--nav-accent);
   position: relative;
-  z-index: 2000;
+}
+nav #ch-menu, nav #hamburger {
+  display: none;
 }
 nav ul.meniu {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: row;
-  /* stilizare optiuni principale */
 }
 nav ul.meniu > li {
   position: relative;
@@ -36,38 +32,34 @@ nav ul.meniu > li {
   height: 50px;
 }
 nav ul.meniu > li a {
+  display: flex;
+  align-items: center;
   color: var(--nav-text);
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
   transition: font-size var(--transition-speed) ease;
 }
-nav ul.meniu > li a i {
-  margin-right: 5px;
-}
-nav ul.meniu > li {
-  /* tranzitie crestere text la hover pe meniul principal */
+nav ul.meniu > li a i, nav ul.meniu > li a .imag-icon {
+  margin-right: 8px;
 }
 nav ul.meniu > li:hover > a {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
-nav ul.meniu > li {
-  /* stilizare submeniu cu scalare pe verticala */
-}
-nav ul.meniu > li ul {
+nav ul.meniu > li ul.submeniu {
   position: absolute;
   top: 100%;
   left: 0;
   width: 220px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
   background-color: var(--nav-bg);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform var(--transition-speed) ease;
+  list-style: none;
+  padding: 0;
+  z-index: 100;
 }
-nav ul.meniu > li ul li {
+nav ul.meniu > li ul.submeniu li {
   position: relative;
   height: 40px;
   border: 1px solid var(--nav-accent);
@@ -75,41 +67,25 @@ nav ul.meniu > li ul li {
   align-items: center;
   padding-left: 10px;
 }
-nav ul.meniu > li ul li a {
-  font-size: 0.9rem;
-}
-nav ul.meniu > li ul li {
-  /* generarea barelor in degrade la stanga si dreapta */
-}
-nav ul.meniu > li ul li::before, nav ul.meniu > li ul li::after {
+nav ul.meniu > li ul.submeniu li::before, nav ul.meniu > li ul.submeniu li::after {
   content: "";
   position: absolute;
   top: 0;
   width: 4px;
-  height: 0; /* incep de la inaltime 0 */
+  height: 0;
   background: linear-gradient(to bottom, #ffffff, #000000);
   transition: height 0.3s ease;
+  display: block;
 }
-nav ul.meniu > li ul li::before {
+nav ul.meniu > li ul.submeniu li::before {
   left: 0;
 }
-nav ul.meniu > li ul li::after {
+nav ul.meniu > li ul.submeniu li::after {
   right: 0;
 }
-nav ul.meniu > li ul li {
-  /* barele cresc la hover */
-}
-nav ul.meniu > li ul li:hover::before, nav ul.meniu > li ul li:hover::after {
+nav ul.meniu > li ul.submeniu li:hover::before, nav ul.meniu > li ul.submeniu li:hover::after {
   height: 100%;
 }
-nav ul.meniu > li {
-  /* deschidem submeniul la hover */
-}
-nav ul.meniu > li:hover ul {
+nav ul.meniu > li:hover ul.submeniu {
   transform: scaleY(1);
-}
-
-/* ascundem checkbox-ul si label-ul pt desktop */
-#ch-menu, #hamburger {
-  display: none;
 }

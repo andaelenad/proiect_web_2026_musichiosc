@@ -10,7 +10,9 @@
     --spatiu-box: 1.5rem;
     --gap-grid: 1.5rem;
 }
-
+.banner-proiect {
+    display: none;
+}
 html { transition: font-size 0.5s ease; }
 
 body {
@@ -119,66 +121,65 @@ header, footer, .zona-grid {
     z-index: 10;
 }
 
-/* =========================================
-   task: stilizare taburi iframe
-   ========================================= */
+//taburi iframe
+
 .container-iframe {
-    display: flex;
-    flex-direction: row; 
-    align-items: flex-start;
-    padding: 20px;
-    gap: 0; 
-    max-width: 1000px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 0;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-iframe[name="ifr-video"] { 
-    flex-grow: 1; 
-    height: 450px; 
-    border: 4px solid var(--color-text); 
-    background-color: #ffffff;
+iframe[name=ifr-video] {
+  flex-grow: 1;
+  height: 450px;
+  border: 4px solid var(--color-text);
+  background-color: #ffffff;
 }
 
 .taburi-iframe {
-    display: flex;
-    flex-direction: column; 
-    margin-top: 30px; 
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
 
 .taburi-iframe a {
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    width: 120px; 
-    height: 50px;
-    background-color: var(--color-bg-dark); 
-    color: #fff;
-    text-decoration: none; 
-    font-weight: bold;
-    border: 4px solid var(--color-text); 
-    border-left: none; 
-    margin-bottom: 15px; 
-    transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 50px;
+  background-color: var(--color-bg-dark);
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border: 4px solid var(--color-text);
+  border-right: none;
+  margin-bottom: 15px;
+  transition: background-color 0.3s;
 }
 
-.taburi-iframe a:hover { 
-    background-color: var(--color-main); 
+.taburi-iframe a:hover {
+  background-color: var(--color-main);
 }
 
 @media screen and (max-width: 768px) {
-    .container-iframe {
-        flex-direction: column;
-        align-items: center;
-    }
-    .taburi-iframe {
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 15px;
-    }
-    .taburi-iframe a {
-        border-left: 4px solid var(--color-text); 
-        margin: 5px;
-    }
+  .container-iframe {
+    flex-direction: column;
+    align-items: center;
+  }
+  .taburi-iframe {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  .taburi-iframe a {
+    border-right: 4px solid var(--color-text);
+    margin: 5px;
+  }
 }
 
 .formula-acustica {
@@ -230,16 +231,11 @@ iframe[name="ifr-video"] {
     color: #fff;
 }
 
-/* =========================================
-   task: stilizare linkuri
-   ========================================= */
 
-/* culoarea linkurilor vizitate */
 a:visited {
     color: var(--color-text);
 }
 
-/* selectam linkurile externe (incep cu http) din tot site-ul */
 a[href^="http"]::before {
     content: "\2B73"; 
     font-size: 1.5em; 
@@ -248,12 +244,10 @@ a[href^="http"]::before {
     transition: color 0.3s ease;
 }
 
-/* la hover pe link extern, schimbam doar culoarea simbolului */
 a[href^="http"]:hover::before {
     color: var(--color-main);
 }
 
-/* efectul de pata de culoare la hover pentru linkurile din main (fara meniu) */
 main a {
     position: relative;
     text-decoration: none;
@@ -268,22 +262,15 @@ main a {
     transition: background-size 0.4s ease;
 }
 
-/* la trecerea cursorului pata creste la 100% */
 main a:hover {
     background-size: 100% 100%;
 }
 
-/* la click apare borderul */
 main a:active {
     border: 2px solid var(--color-main);
 }
 
 
-/* =========================================
-   task: video si vtt
-   ========================================= */
-
-/* latime in procentaje, limitata la un minim si maxim pe ecran */
 #video-prezentare {
     width: 80%;
     min-width: 300px;
@@ -294,7 +281,6 @@ main a:active {
     box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
-/* stilizarea textului din vtt */
 ::cue {
     background-color: transparent; 
     color: #ffffff; 
@@ -303,115 +289,104 @@ main a:active {
 }
 
 
-/* =========================================
-   task: css-printare (modificat pentru noile cerinte)
-   ========================================= */
 
-/* ascundem watermark-ul pe ecrane normale, el apare doar pe hartie */
 #watermark-print {
-    display: none;
+    display: block !important;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.5;
+    z-index: 9999;
 }
 
 @media print {
-    /* marginile paginilor in functie de paritate */
-    @page :left {
-        margin-left: 3cm;
-        margin-right: 1cm;
-    }
-    @page :right {
-        margin-left: 1cm;
-        margin-right: 3cm;
+    
+    @page :left { margin: 1cm 1cm 1cm 3cm; }
+    @page :right { margin: 1cm 3cm 1cm 1cm; }
+
+   
+    img, video, iframe, audio, object, canvas, 
+    figure figcaption, #link-top, #hamburger, #ch-menu { 
+        display: none !important; 
     }
 
-    /* ascundem mediile si alte elemente */
-    img, video, iframe, object, picture, source, canvas, 
-    figure figcaption, #link-top, #hamburger {
-        display: none !important;
-    }
-
-    /* transformam gridul in block pt a evita sectionarea */
-    #grid-pagina, .zona-grid {
+   
+    #grid-pagina, .zona-grid, main {
         display: block !important;
-        page-break-inside: avoid;
+        width: 100% !important;
     }
 
-    /* culori reseteate pt economie tus */
-    body, main, header, .zona-grid {
-        background-color: transparent !important;
-        color: #000000 !important;
-        box-shadow: none !important;
-        border: 1px solid #cccccc !important;
-    }
-
-    h1, h2, h3, p, span, div {
-        color: #000000 !important;
-    }
-
-    /* linkurile devin text normal */
+    
     a {
-        color: #000000 !important;
+        color: black !important;
         text-decoration: none !important;
+        background: none !important;
     }
 
-    /* formatarea primelor elemente: h1 centrat si meniul ca lista */
-    header h1 {
-        text-align: center;
-        page-break-after: avoid;
+   
+    header h1 { 
+        text-align: center; 
+        margin-bottom: 20px;
     }
 
     nav ul.meniu {
-        display: block !important;
-        text-align: left;
+        display: block !important; 
+        padding-top: 1rem;
+        li {
+            display: list-item !important;
+            list-style-type: disc;
+            margin-bottom: 5px;
+            border: none !important;
+            ul.submeniu { display: none !important; } 
+        }
     }
 
-    nav ul.meniu > li {
-        display: block !important;
-        border: none !important;
-    }
+    
+    nav { page-break-after: always; } 
+    main { page-break-after: always; }
+    footer { page-break-before: always; } 
 
-    /* ascundem submeniurile total la print */
-    nav ul.meniu ul {
-        display: none !important;
-    }
-
-    /* page breaks inainte si dupa sectiuni */
-    nav {
-        page-break-after: always !important;
-    }
-
-    footer {
-        page-break-before: always !important;
-    }
-
-    /* bannerul la sfarsitul primei pagini */
-    #banner-proiect {
+.page-container {
+    position: relative;
+    min-height: 297mm; 
+    padding-bottom: 50px; 
+}
+   
+    .banner-proiect {
         display: block !important;
         position: absolute;
-        top: 25cm; 
+        bottom: 0;
         left: 15%;
         width: 70%;
-        border: 4px inset #000000;
+        border: 4px inset black; 
         text-align: center;
         padding: 10px;
-        background-color: white;
+        background: white;
+        z-index: 9999;
     }
 
-    /* watermark-ul pe fiecare pagina */
     #watermark-print {
-        display: block;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: fixed; 
-        bottom: 0;
-        right: 0;
-        width: 4cm;
-        height: 1cm;
-        border: 3px solid #000000;
-        border-radius: 5px;
-        opacity: 0.4;
+        bottom: 0.5cm;
+        right: 0.5cm;
+        width: 4cm; 
+        height: 1.2cm; 
+        padding: 0.2cm;
+        border: 3px solid black; 
+        border-radius: 10px;
+        opacity: 0.9; 
         text-align: center;
+        color: black;
+        background-color: rgba(255,255,255,0.95);
         font-weight: bold;
-        font-size: 10px; 
-        line-height: 1.2;
-        padding-top: 2px;
-        box-sizing: border-box;
+        font-size: 10px;
+        line-height: 1.1;
+        page-break-inside: avoid;
+        z-index: 10008;
+        
     }
 }
