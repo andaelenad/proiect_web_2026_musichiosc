@@ -1,0 +1,28 @@
+<section id="galerie">
+    <h2 class="titlu-galerie"><u>Galerie Foto</u></h2>
+    <div class="galerie-grid">
+        <% 
+        // Filtrare și limitare la 10 imagini
+        let afisate = 0;
+        for(let imag of locals.imagini) { 
+            if(afisate >= 10) break; // Trunchiem la 10
+            
+            // Incrementăm contorul de afișate
+            afisate++;
+        %>
+            <figure style="grid-area: img<%= afisate %>;">
+                <picture>
+                    <source srcset="<%= imag.fisier_mic %>" media="(max-width: 700px)">
+                    <source srcset="<%= imag.fisier_mediu %>" media="(max-width: 1100px)">
+                    <img src="<%= imag.fisier %>" 
+                         alt="<%= imag.alt || imag.titlu %>" 
+                         title="<%= imag.descriere %>">
+                </picture>
+                <figcaption>
+                    <h4 class="titlu-imagine"><%- imag.artist %></h4>
+                    <p class="descriere-imagine"><%- imag.descriere %></p>
+                </figcaption>
+            </figure>
+        <% } %>
+    </div>
+</section>

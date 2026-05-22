@@ -1,0 +1,217 @@
+create user andaelena with encrypted password 'andaelena';
+
+grant all privileges on database magazincd to andaelena;
+grant all privileges on all tables in schema public to andaelena;
+grant all privileges on all sequences in schema public to andaelena;
+
+
+
+-- stergere tabele vechi
+drop table if exists produse;
+drop type if exists categorii_album;
+drop type if exists tipuri_format;
+
+-- creare tipuri
+create type categorii_album as enum(
+    'Rap',
+    'Rock',
+    'Jazz',
+    'Pop',
+    'Metal',
+    'Electronic'
+);
+
+create type tipuri_format as enum(
+    'Vinyl',
+    'CD',
+    'Cassette',
+    'Collector',
+    'Digital'
+);
+
+-- creare tabel
+create table produse (
+   id int primary key,
+   nume varchar(150) not null,
+   artist varchar(150) not null,
+   descriere text,
+   imagine varchar(300),
+   categorie categorii_album not null,
+   pret int not null check (pret >= 0),
+   an_lansare int check (an_lansare >= 1900),
+   stoc int default 0 check (stoc >= 0),
+   data_adaugare date default current_date,
+   format_album tipuri_format default 'Vinyl',
+   editie_limitata boolean not null default false
+);
+
+insert into produse (
+    id,
+    nume,
+    artist,
+    descriere,
+    imagine,
+    categorie,
+    pret,
+    an_lansare,
+    stoc,
+    data_adaugare,
+    format_album,
+    editie_limitata
+) values
+
+(1,
+'DAMN.',
+'Kendrick Lamar',
+'Editie speciala pe vinil dublu.',
+'Resurse/imagini/galerie/1.jpg',
+'Rap',
+150,
+2017,
+10,
+'2026-01-10',
+'Vinyl',
+true),
+
+(2,
+'The Eminem Show',
+'Eminem',
+'Unul dintre cele mai bine vandute albume.',
+'Resurse/imagini/galerie/2.jpg',
+'Rap',
+130,
+2002,
+15,
+'2026-01-15',
+'CD',
+false),
+
+(3,
+'Enter the Wu-Tang',
+'Wu-Tang Clan',
+'Debutul care a definit hip-hop-ul de Est.',
+'Resurse/imagini/galerie/3.jpg',
+'Rap',
+140,
+1993,
+8,
+'2026-02-01',
+'Vinyl',
+true),
+
+(4,
+'Illmatic',
+'Nas',
+'Capodopera lirica a lui Nas.',
+'Resurse/imagini/galerie/4.jpg',
+'Rap',
+160,
+1994,
+5,
+'2026-02-10',
+'Collector',
+true),
+
+(5,
+'All Eyez on Me',
+'2Pac',
+'Primul album dublu din istoria rap.',
+'Resurse/imagini/galerie/5.jpg',
+'Rap',
+180,
+1996,
+7,
+'2026-02-15',
+'Vinyl',
+true),
+
+(6,
+'Dark Side of the Moon',
+'Pink Floyd',
+'O experienta audiofila suprema.',
+'Resurse/imagini/galerie/6.jpg',
+'Rock',
+200,
+1973,
+12,
+'2026-03-01',
+'Collector',
+true),
+
+(7,
+'IV',
+'Led Zeppelin',
+'Contine legendarul Stairway to Heaven.',
+'Resurse/imagini/galerie/7.jpg',
+'Rock',
+170,
+1971,
+6,
+'2026-03-10',
+'Vinyl',
+false),
+
+(8,
+'Nevermind',
+'Nirvana',
+'Albumul grunge care a schimbat istoria.',
+'Resurse/imagini/galerie/8.jpg',
+'Rock',
+150,
+1991,
+9,
+'2026-03-15',
+'CD',
+false),
+
+(9,
+'Kind of Blue',
+'Miles Davis',
+'Cel mai important album de jazz.',
+'Resurse/imagini/galerie/9.jpg',
+'Jazz',
+190,
+1959,
+4,
+'2026-04-01',
+'Collector',
+true),
+
+(10,
+'DAMN. Deluxe',
+'Kendrick Lamar',
+'Varianta deluxe cu artwork exclusiv.',
+'Resurse/imagini/galerie/10.jpg',
+'Rap',
+150,
+2017,
+11,
+'2026-04-10',
+'Vinyl',
+true),
+
+(11,
+'The Eminem Show Expanded',
+'Eminem',
+'Editie remasterizata.',
+'Resurse/imagini/galerie/12.jpg',
+'Rap',
+130,
+2002,
+10,
+'2026-04-20',
+'CD',
+false),
+
+(12,
+'Enter the Wu-Tang Deluxe',
+'Wu-Tang Clan',
+'Versiune aniversara deluxe.',
+'Resurse/imagini/galerie/13.jpg',
+'Rap',
+140,
+1993,
+5,
+'2026-05-01',
+'Collector',
+true);

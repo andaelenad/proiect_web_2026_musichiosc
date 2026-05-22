@@ -1,29 +1,43 @@
-$fundal-pagina: #C0DB7F;   
-$contur-inchis: #557226;    
-$text-inchis: #273635;      
-$special-gri: #4e5650;    
+// 1. Variabile Bootstrap Customizate
 
-@use '../../node_modules/bootstrap/scss/bootstrap.scss' with (
-    $primary: $contur-inchis,
-    $secondary: $special-gri,
-    $body-bg: $fundal-pagina,
-    $body-color: $text-inchis,
-    $font-family-base: ('Noto Sans', sans-serif),
-    $grid-breakpoints: (
-        xs: 0,
-        sm: 700px,
-        md: 1000px,
-        lg: 1200px,
-        xl: 1400px,
-        xxl: 1600px
-    ),
-    $border-radius: 20px,
-    $border-radius-lg: 50px,
-    $h1-font-size: 4.5rem,
-    $h2-font-size: 3rem, 
-    $btn-font-weight: 700
+// Culori customizate 
+$primary: #ff5722;   // Tema cromatică dorită 1
+$secondary: #8bc34a; // Tema cromatică dorită 2
+
+// Culoare text implicită (pentru toată pagina sau specific)
+$body-color: #212529;
+
+// Dimensiuni ecrane custom (breakpoints)
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 800px, // Valoare schimbată pentru ecran mediu (default e 768px)
+  lg: 1100px, // Valoare schimbată pentru ecran mare (default e 992px)
+  xl: 1200px,
+  xxl: 1400px
 );
 
-.btn-primary, .btn-secondary {
-    color: #ffffff !important;
+// Raza de border modificată (mai rotund)
+$border-radius: 15px;
+$border-radius-lg: 20px;
+
+// Familia de fonturi
+$font-family-base: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$headings-font-family: 'Georgia', serif;
+
+// Dimensiune literă implicită și pentru H1
+$font-size-base: 1.1rem;
+$h1-font-size: 3.5rem;
+
+// Încă o variabilă custom (de ex. link color)
+$link-color: #e91e63;
+
+// 2. Import Bootstrap (presupunând că l-ai instalat prin npm/node_modules)
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// 3. Suprascrieri / Reguli CSS de corectare (cerință extra)
+// Bootstrap poate "strica" stiluri native ale listelor din proiect, le reparam dacă e cazul
+ul.lista-proiect-nativa {
+    list-style-type: disc;
+    padding-left: 2rem;
 }

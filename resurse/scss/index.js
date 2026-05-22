@@ -12,14 +12,13 @@ console.log("--- Verificare Căi ---");
 console.log("Calea folderului curent al scriptului (__dirname):", __dirname);
 console.log("Calea fișierului curent (__filename):", __filename);
 console.log("Folderul curent de lucru (process.cwd()):", process.cwd());
-console.log("Întrebare: Sunt __dirname și process.cwd() la fel mereu? Răspuns: NU. __dirname depinde de unde e fișierul, process.cwd() depinde de unde rulezi comanda în terminal.");
 console.log("----------------------");
 
 global.obGlobal = {
     obErori: null,
     obImagini: null,
     folderScss: path.join(__dirname, "resurse/scss"),
-    folderCss: path.join(__dirname, "resurse/CSS"),
+    folderCss: path.join(__dirname, "resurse/css"), // REPARAT: Litere mici pentru a se mapa fizic pe disc peste tot
     folderBackup: path.join(__dirname, "backup"),
 };
 
@@ -36,7 +35,7 @@ app.use("/resurse", express.static(path.join(__dirname, "resurse")));
 app.use("/dist", express.static(path.join(__dirname, "/node_modules/bootstrap/dist")));
 
 app.get("/favicon.ico", function(req, res) {
-    res.sendFile(path.join(__dirname, "resurse/imagini/ico/favicon.ico"));
+    res.sendFile(path.join(__dirname, "resurse/imagini/favicon/favicon.ico"));
 });
 
 app.get(["/", "/index", "/home"], function(req, res) {
@@ -46,12 +45,12 @@ app.get(["/", "/index", "/home"], function(req, res) {
     });
 });
 
-// BONUS: verificare JSON erori
+
 
 function verificaErori() {
     let caleJson = path.join(__dirname, "resurse/json/erori.json");
 
-    // Bonus 0.025: Nu am erori.json -> stop aplicatie
+
     if (!fs.existsSync(caleJson)) {
         console.error("CRITICAL ERROR: Fișierul erori.json nu există! Aplicația se oprește.");
         process.exit(1);
@@ -92,7 +91,6 @@ function verificaErori() {
     }
 
     // Bonus 0.025: fold din cale_baza nu e în sistem
-    // Eliminăm primul slash dacă e rută absolută web pentru a o verifica pe disk
     let caleBazaAbs = path.join(__dirname, eroriObj.cale_baza);
     if (!fs.existsSync(caleBazaAbs)) {
         console.error(`Eroare sistem: Folderul specificat în cale_baza (${caleBazaAbs}) nu există pe disc.`);
@@ -108,7 +106,7 @@ function verificaErori() {
         }
     }
 
-    // Bonus 0.15: Identificatori duplicati in info_erori
+    // Bonus 0.15: identificatori duplicati in info_erori
     if (eroriObj.info_erori) {
         let idSăvârșite = [];
         for (let i = 0; i < eroriObj.info_erori.length; i++) {
@@ -122,17 +120,14 @@ function verificaErori() {
     }
 }
 
-// apelez verif
 verificaErori();
 
-// Initializare Erori în Memorie
 function initErori() {
     let caleJson = path.join(__dirname, "resurse/json/erori.json");
     let continut = fs.readFileSync(caleJson).toString("utf-8");
     let erori = obGlobal.obErori = JSON.parse(continut);
     
-    // ATENȚIE: Nu folosim path.join hardcoded pentru HTML. Lăsăm căi de tip URL relative la server.
-    let de_la_baza = erori.cale_baza; // e deja "/resurse/imagini/erori"
+    let de_la_baza = erori.cale_baza; 
     
     erori.eroare_default.imagine = de_la_baza + "/" + erori.eroare_default.imagine;
     for (let eroare of erori.info_erori) {
@@ -141,15 +136,13 @@ function initErori() {
 }
 initErori();
 
-// Funcția de afișare erori conform cerințelor
 function afisareEroare(res, identificator, titlu, text, imagine) {
     let eroare = obGlobal.obErori.info_erori.find((elem) => elem.identificator == identificator);
     let errDefault = obGlobal.obErori.eroare_default;
     
-    // Stabilim codul de status alocat
     let statusHttp = identificator || 500;
     if (eroare && eroare.status === false) {
-        statusHttp = 200; // Dacă în JSON scrie status: false, forțăm 200 conform instrucțiunilor tale din text
+        statusHttp = 200; 
     }
     res.status(statusHttp);
     
@@ -160,7 +153,6 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     });
 }
 
-// Restul rutelelor tale (Galerie, Produse, Produs individual)
 app.get("/galerie", function(req, res) {
     if (!obGlobal.obImagini) return res.send("Imaginile nu sunt incarcate.");
     let imaginiPare = obGlobal.obImagini.imagini.filter((img, idx) => idx % 2 === 0);
@@ -245,7 +237,10 @@ function initImagini() {
     if (!fs.existsSync(caleAbsMediu)) fs.mkdirSync(caleAbsMediu, { recursive: true });
     
     for (let imag of vImagini) {
-        let [numeFis, ext] = imag.fisier_imagine.split("."); 
+        let parti = imag.fisier_imagine.split(".");
+        let ext = parti.pop();
+        let numeFis = parti.join("."); 
+        
         let caleFisAbs = path.join(caleAbs, imag.fisier_imagine);
         let caleFisMediuAbs = path.join(caleAbsMediu, numeFis + ".webp");
         if (fs.existsSync(caleFisAbs)) {
@@ -257,21 +252,51 @@ function initImagini() {
 }
 initImagini();
 
+// BONUS 5: Funcție de verificare asertivă a datelor din JSON-ul cu imagini al galeriei
+function verificaJsonGalerie() {
+    if (!obGlobal.obImagini) return;
+    let caleGalerie = obGlobal.obImagini.cale_galerie;
+    if (!caleGalerie) return;
+
+    let caleAbs = path.join(__dirname, caleGalerie);
+    
+    // (0.025) Verificare folder specificat în cale_galerie dacă nu există
+    if (!fs.existsSync(caleAbs)) {
+        console.error(`[Eroare Galerie JSON]: Folderul specificat în cale_galerie nu există în sistem: ${caleAbs}`);
+        return;
+    }
+
+    // (0.025) Verificare existență fizică fișiere imagine
+    if (obGlobal.obImagini.imagini) {
+        for (let imag of obGlobal.obImagini.imagini) {
+            let caleFisAbs = path.join(caleAbs, imag.fisier_imagine);
+            if (!fs.existsSync(caleFisAbs)) {
+                console.error(`[Eroare Galerie Resursă]: Fișierul imagine specificat în listă nu există pe disc: ${caleFisAbs}`);
+            }
+        }
+    }
+}
+verificaJsonGalerie();
+
+// REPARAT COMPLET: Suportă fișiere cu puncte multiple folosind regex (Bonus 4) și backup indexat corect în foldere (Bonus 3)
 function compileazaScss(caleScss, caleCss) {
+    let numeFisExt = path.basename(caleScss); 
+    // Rezolvare Bonus 4: Elimină doar extensia .scss de la final, lăsând punctele din interior intacte (ex: stil.frumos.scss devine stil.frumos)
+    let numeFis = numeFisExt.replace(/\.scss$/, '');   
+
     if (!caleCss) {
-        let numeFisExt = path.basename(caleScss); 
-        let numeFis = numeFisExt.split(".")[0];   
         caleCss = numeFis + ".css"; 
     }
     if (!path.isAbsolute(caleScss)) caleScss = path.join(obGlobal.folderScss, caleScss);
     if (!path.isAbsolute(caleCss)) caleCss = path.join(obGlobal.folderCss, caleCss);
     
-    let caleBackup = path.join(obGlobal.folderBackup, "resurse/CSS");
+    let caleBackup = path.join(obGlobal.folderBackup, "resurse/css");
     if (!fs.existsSync(caleBackup)) fs.mkdirSync(caleBackup, { recursive: true });
     
     let numeFisCss = path.basename(caleCss);
     if (fs.existsSync(caleCss)) {
         let timestamp = Date.now();
+        // Rezolvare Bonus 3: Salvare în backup cu timestamp numeric atașat la început
         fs.copyFileSync(caleCss, path.join(caleBackup, timestamp + "_" + numeFisCss));
     }
     try {
@@ -288,7 +313,9 @@ if (fs.existsSync(obGlobal.folderScss)) {
     fs.watch(obGlobal.folderScss, function(eveniment, numeFis) {
         if (eveniment == "change" || eveniment == "rename") {
             let caleCompleta = path.join(obGlobal.folderScss, numeFis);
-            if (fs.existsSync(caleCompleta)) compileazaScss(caleCompleta);
+            if (fs.existsSync(caleCompleta) && path.extname(numeFis) == ".scss") {
+                compileazaScss(caleCompleta);
+            }
         }
     });
 }

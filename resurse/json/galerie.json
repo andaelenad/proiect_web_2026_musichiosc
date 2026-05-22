@@ -1,125 +1,17 @@
 {
-    "cale_galerie": "Resurse/Imagini/galerie",
-    "imagini": [
-        {
-            "id": 1,
-            "pret": 150,
-            "categorie": "Rap",
-            "artist": "Kendrick Lamar",
-            "nume": "DAMN.",
-            "an_lansare": 2017,
-            "fisier_imagine": "1.jpg",
-            "timp": "00:00-23:59",
-            "continut_alternativ": "Coperta albumului DAMN. de Kendrick Lamar",
-            "descriere": "Ediție specială pe vinil dublu de 180g, un clasic modern."
-        },
-        {
-            "id": 2,
-            "pret": 130,
-            "categorie": "Rap",
-            "artist": "Eminem",
-            "nume": "The Eminem Show",
-            "an_lansare": 2002,
-            "fisier_imagine": "2.jpg",
-            "timp": "08:00-14:00",
-            "continut_alternativ": "Coperta The Eminem Show",
-            "descriere": "Unul dintre cele mai bine vândute albume rap din istorie."
-        },
-        {
-            "id": 3,
-            "pret": 140,
-            "categorie": "Rap",
-            "artist": "Wu-Tang Clan",
-            "nume": "Enter the Wu-Tang",
-            "an_lansare": 1993,
-            "fisier_imagine": "3.jpg",
-            "timp": "12:00-18:00",
-            "continut_alternativ": "Logo-ul clasic Wu-Tang",
-            "descriere": "Albumul de debut care a definit sunetul hip-hop de Est."
-        },
-        {
-            "id": 4,
-            "pret": 160,
-            "categorie": "Rap",
-            "artist": "Nas",
-            "nume": "Illmatic",
-            "an_lansare": 1994,
-            "fisier_imagine": "4.jpg",
-            "timp": "18:00-23:59",
-            "continut_alternativ": "Coperta Illmatic",
-            "descriere": "Capodopera lirică a lui Nas."
-        },
-        {
-            "id": 5,
-            "pret": 180,
-            "categorie": "Rap",
-            "artist": "2Pac",
-            "nume": "All Eyez on Me",
-            "an_lansare": 1996,
-            "fisier_imagine": "5.jpg",
-            "timp": "06:00-12:00",
-            "continut_alternativ": "2Pac All Eyez on Me cover",
-            "descriere": "Primul album dublu din istoria hip-hop-ului."
-        },
-        {
-            "id": 6,
-            "pret": 200,
-            "categorie": "Rock",
-            "artist": "Pink Floyd",
-            "nume": "Dark Side of the Moon",
-            "an_lansare": 1973,
-            "fisier_imagine": "6.jpg",
-            "timp": "10:00-22:00",
-            "continut_alternativ": "Prisma Pink Floyd",
-            "descriere": "O experiență audiofilă supremă."
-        },
-        {
-            "id": 7,
-            "pret": 170,
-            "categorie": "Rock",
-            "artist": "Led Zeppelin",
-            "nume": "IV",
-            "an_lansare": 1971,
-            "fisier_imagine": "7.jpg",
-            "timp": "14:00-20:00",
-            "continut_alternativ": "Tabloul Led Zeppelin",
-            "descriere": "Conține legendarul Stairway to Heaven."
-        },
-        {
-            "id": 8,
-            "pret": 150,
-            "categorie": "Rock",
-            "artist": "Nirvana",
-            "nume": "Nevermind",
-            "an_lansare": 1991,
-            "fisier_imagine": "8.jpg",
-            "timp": "00:00-23:59",
-            "continut_alternativ": "Bebelușul Nirvana",
-            "descriere": "Albumul grunge care a schimbat istoria."
-        },
-        {
-            "id": 16,
-            "pret": 190,
-            "categorie": "Jazz",
-            "artist": "Miles Davis",
-            "nume": "Kind of Blue",
-            "an_lansare": 1959,
-            "fisier_imagine": "17.jpg",
-            "timp": "20:00-04:00",
-            "continut_alternativ": "Miles Davis la trompetă",
-            "descriere": "Cel mai important album de jazz din istorie."
-        },
-        {
-            "id": 18,
-            "pret": 200,
-            "categorie": "Electronic",
-            "artist": "Daft Punk",
-            "nume": "Random Access Memories",
-            "an_lansare": 2013,
-            "fisier_imagine": "19.jpg",
-            "timp": "00:00-23:59",
-            "continut_alternativ": "Căștile Daft Punk",
-            "descriere": "O capodoperă electronică analogică."
-        }
-    ]
+  "cale_galerie": "resurse/imagini/galerie",
+  "imagini": [
+    { "id": 1, "pret": 150, "categorie": "Rap", "artist": "Kendrick Lamar", "nume": "DAMN.", "an_lansare": 2017, "fisier_imagine": "1.jpg", "timp": "00:00-23:59", "continut_alternativ": "DAMN.", "descriere": "Ediție specială pe vinil dublu." },
+    { "id": 2, "pret": 130, "categorie": "Rap", "artist": "Eminem", "nume": "The Eminem Show", "an_lansare": 2002, "fisier_imagine": "2.jpg", "timp": "00:00-23:59", "continut_alternativ": "Eminem", "descriere": "Unul dintre cele mai bine vândute albume." },
+    { "id": 3, "pret": 140, "categorie": "Rap", "artist": "Wu-Tang Clan", "nume": "Enter the Wu-Tang", "an_lansare": 1993, "fisier_imagine": "3.jpg", "timp": "00:00-23:59", "continut_alternativ": "Wu-Tang", "descriere": "Debutul care a definit hip-hop-ul de Est." },
+    { "id": 4, "pret": 160, "categorie": "Rap", "artist": "Nas", "nume": "Illmatic", "an_lansare": 1994, "fisier_imagine": "4.jpg", "timp": "00:00-23:59", "continut_alternativ": "Illmatic", "descriere": "Capodopera lirică a lui Nas." },
+    { "id": 5, "pret": 180, "categorie": "Rap", "artist": "2Pac", "nume": "All Eyez on Me", "an_lansare": 1996, "fisier_imagine": "5.jpg", "timp": "00:00-23:59", "continut_alternativ": "2Pac", "descriere": "Primul album dublu din istoria rap." },
+    { "id": 6, "pret": 200, "categorie": "Rock", "artist": "Pink Floyd", "nume": "Dark Side of the Moon", "an_lansare": 1973, "fisier_imagine": "6.jpg", "timp": "00:00-23:59", "continut_alternativ": "Pink Floyd", "descriere": "O experiență audiofilă supremă." },
+    { "id": 7, "pret": 170, "categorie": "Rock", "artist": "Led Zeppelin", "nume": "IV", "an_lansare": 1971, "fisier_imagine": "7.jpg", "timp": "00:00-23:59", "continut_alternativ": "Led Zeppelin", "descriere": "Conține legendarul Stairway to Heaven." },
+    { "id": 8, "pret": 150, "categorie": "Rock", "artist": "Nirvana", "nume": "Nevermind", "an_lansare": 1991, "fisier_imagine": "8.jpg", "timp": "00:00-23:59", "continut_alternativ": "Nirvana", "descriere": "Albumul grunge care a schimbat istoria." },
+    { "id": 9, "pret": 190, "categorie": "Jazz", "artist": "Miles Davis", "nume": "Kind of Blue", "an_lansare": 1959, "fisier_imagine": "9.jpg", "timp": "00:00-23:59", "continut_alternativ": "Miles Davis", "descriere": "Cel mai important album de jazz." },
+    { "id": 10, "pret": 150, "categorie": "Rap", "artist": "Kendrick Lamar", "nume": "DAMN.", "an_lansare": 2017, "fisier_imagine": "10.jpg", "timp": "00:00-23:59", "continut_alternativ": "DAMN.", "descriere": "Ediție specială pe vinil dublu." },
+    { "id": 11, "pret": 130, "categorie": "Rap", "artist": "Eminem", "nume": "The Eminem Show", "an_lansare": 2002, "fisier_imagine": "12.jpg", "timp": "00:00-23:59", "continut_alternativ": "Eminem", "descriere": "Unul dintre cele mai bine vândute albume." },
+    { "id": 12, "pret": 140, "categorie": "Rap", "artist": "Wu-Tang Clan", "nume": "Enter the Wu-Tang", "an_lansare": 1993, "fisier_imagine": "13.jpg", "timp": "00:00-23:59", "continut_alternativ": "Wu-Tang", "descriere": "Debutul care a definit hip-hop-ul de Est." }
+  ]
 }

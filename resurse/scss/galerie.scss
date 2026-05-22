@@ -1,114 +1,91 @@
-$durata-tranzitie: 1.25s;
-$culoare-text-hover: #ffffff;
-$culoare-bg-hover: #D81B60;
+/* =========================================
+   GALERIA ANIMATĂ
+========================================= */
+$nrimag: 4 !default;
+$procent: 100 / $nrimag;
 
-#galerie-statica {
-    width: 100%;
-    padding: 20px 0;
-}
+.galerie-animata-container {
+    width: 600px; height: 400px; position: relative;
+    border: 15px solid transparent;
+    border-image: url('/Resurse/Imagini/border-pattern.png') 30 stretch;
+    overflow: hidden; margin: 0 auto;
 
-#grid-galerie {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, auto);
-    gap: 15px;
-    counter-reset: foto-counter; 
+    &:hover figure { animation-play-state: paused; }
 
     figure {
-        margin: 0;
-        counter-increment: foto-counter;
-        transition: transform 1.25s ease; 
-        transform-origin: bottom center;
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 100%; margin: 0; opacity: 0;
+        animation: animatie-clip #{$nrimag * 3}s linear infinite;
 
+        img { width: 100%; height: 100%; object-fit: cover; }
+    }
 
-        @media screen and (min-width: 1001px) {
-            &:nth-of-type(1) { grid-area: 1 / 1; }
-            &:nth-of-type(2) { grid-area: 1 / 2; }
-            &:nth-of-type(3) { grid-area: 1 / 3; }
-            &:nth-of-type(4) { grid-area: 2 / 2; } 
-            &:nth-of-type(5) { grid-area: 3 / 1; }
-            &:nth-of-type(6) { grid-area: 3 / 2; }
-            &:nth-of-type(7) { grid-area: 3 / 3; }
-            &:nth-of-type(8) { grid-area: 4 / 1; }
-            &:nth-of-type(9) { grid-area: 4 / 3; }
-        }
-
-        &:hover {
-            transform: scale(1.3) translateY(-10%); 
-            z-index: 10;
-            figcaption { background: #D81B60; color: white; }
-        }
-        
-        .index-galerie::before {
-            content: counter(foto-counter, lower-latin) ") "; 
-        }
+    @for $i from 1 through 16 {
+        figure:nth-child(#{$i}) { animation-delay: ($i - 1) * 3s; }
     }
 }
 
-@media screen and (max-width: 1000px) {
-    #grid-galerie {
-        grid-template-columns: repeat(2, 1fr);
-        figure { grid-area: auto !important; }
-    }
-}
-@media screen and (max-width: 700px) {
-    #grid-galerie {
-        grid-template-columns: 1fr;
-    }
-}
-
-@keyframes decupare-centru {
-    0% { clip-path: inset(50% 0 50% 0); opacity: 1; }
-    5% { clip-path: inset(0 0 0 0); opacity: 1; }
-    20% { clip-path: inset(0 0 0 0); opacity: 1; }
-    25% { clip-path: inset(50% 0 50% 0); opacity: 0; }
+@keyframes animatie-clip {
+    0% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    #{$procent / 2}% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    #{$procent - 0.1}% { opacity: 1; clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%); }
+    #{$procent}% { opacity: 0; }
     100% { opacity: 0; }
 }
 
-#sectiune-galerie-animata {
-    display: flex;
-    justify-content: center;
-    margin: 3rem 0;
-}
+/* =========================================
+   GALERIA STATICĂ - GRID 3x4 CU GOLURI
+========================================= */
+#galerie {
+    .titlu-galerie { text-align: left; margin-bottom: 15px; }
 
-#galerie-animata {
-    width: 400px;
-    height: 400px;
-    position: relative;
-    overflow: hidden;
-    border: 10px solid transparent;
-    border-image: url('/Resurse/Imagini/vinyl2.png') 30 stretch; 
+    .galerie-grid {
+        display: grid;
+        gap: 20px;
+        margin-top: 20px;
+        counter-reset: roman-counter;
+        
+        // Forma specifică cerută de 3 coloane și 4 rânduri
+        grid-template-areas: 
+            "img1 img2 img3 img4"
+            "img5 .     . img6 "
+            "img7 img8 img9 img10";
+           
+    }
 
     figure {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        margin: 0;
-        opacity: 0;
-        animation: decupare-centru calc(var(--total-imagini) * 3s) infinite;
-        animation-delay: calc(var(--index-imagine) * 3s);
-        
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        margin: 0; display: flex; flex-direction: column;
+        border: 1px solid #eee; border-radius: 8px; overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #fff;
+        counter-increment: roman-counter;
 
-        figcaption {
-            position: absolute;
-            bottom: 0; width: 100%;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            text-align: center;
-            padding: 5px;
+        &:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            img { transform: scale(1.1); opacity: 0.8; }
         }
     }
 
-    &:hover figure {
-        animation-play-state: paused;
+    img {
+        width: 100%; height: 210px; display: block;
+        object-fit: cover; transform-origin: center;
+        transition: all 0.3s ease;
+    }
+
+    figcaption {
+        padding: 15px; text-align: center; background-color: #f9f9f9;
+        
+        .titlu-imagine {
+            font-weight: 600; margin: 0 0 5px 0;
+            &::before { content: counter(roman-counter, lower-roman) ". "; }
+        }
     }
 }
 
+// Responsive
 @media screen and (max-width: 1000px) {
-    #sectiune-galerie-animata { display: none; }
+    #galerie .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-template-areas: none; }
+}
+@media screen and (max-width: 700px) {
+    #galerie .galerie-grid { grid-template-columns: 1fr; grid-template-areas: none; }
 }

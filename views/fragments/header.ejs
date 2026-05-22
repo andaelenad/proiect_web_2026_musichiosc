@@ -26,11 +26,16 @@
             
             <li>
                 <a href="/produse">
-                    <i class="fa-solid fa-jar"></i> <span class="text-nav">Produse</span> </a>
-                <ul class="submeniu"> <li><a href="/produse">Toate</a></li>
-                    <li><a href="/produse#">CD-uri</a></li>
-                    <li><a href="/produse#">Vinyl-uri</a></li>
-                    <li><a href="/produse#">Casete</a></li>
+                    <i class="fa-solid fa-jar"></i>
+                    <span class="text-nav">Produse</span>
+                </a>
+                <ul class="submeniu">
+                    <li><a href="/produse">Toate</a></li>
+                    <% if (locals.optiuniMeniu) { %>
+                        <% for(let opt of optiuniMeniu) { %>
+                            <li><a href="/produse?tip=<%- opt.nume %>"><%- opt.nume %></a></li>
+                        <% } %>
+                    <% } %>
                 </ul>
             </li>
 

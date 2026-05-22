@@ -1,50 +1,150 @@
 <!DOCTYPE html>
 <html lang="ro">
-    <head>
-        <meta name="description" content="Musichiosc oferă CD-uri, vinyl-uri și albume de colecție. Detalii despre albumul <%- locals.prod ? (locals.prod.nume || locals.prod.titlu) : '' %>">
-        <meta name="keywords" content="CD, muzica, vinyl, Musichiosc, album, <%- locals.prod ? (locals.prod.nume || locals.prod.titlu) : '' %>">
-        
-        <title>Musichiosc - <%- locals.prod ? (locals.prod.nume || locals.prod.titlu) : 'Produs' %></title>
-        
-        <%- include("../fragments/head.ejs") %>     
-        <link href="/Resurse/CSS/produs.css" type="text/css" rel="stylesheet" />
-    </head>
-    <body>
 
-    <%- include("../fragments/header.ejs") %>
-    
-    <main>
-        <section>
-            <h2>Detalii Album</h2>
-            <hr class="hr-special">
-       
-            <% if (locals.prod) { %>
-                <article id="art-produs">
-                    <h3><span class="nume"><%- locals.prod.nume || locals.prod.titlu || 'Titlu Necunoscut' %></span></h3>
-                    
-                  <div class="duotone-box">  <p><strong>Artist:</strong> <span class="artist"><%- locals.prod.artist || 'Artist Necunoscut' %> </span></p>      </div>
-                    <p><strong>Preț:</strong> <span class="pret"><%- locals.prod.pret || 0 %> Lei</span></p>
-                    <p><strong>An lansare:</strong> <span class="an_lansare"><%- locals.prod.an_lansare || 'N/A' %> </span></p>
-                    <p><strong>Format:</strong> <span class="format"><%- locals.prod.format || 'CD' %> </span></p>
-                    <p><strong>Gen muzical:</strong> <span class="categorie"><%- locals.prod.categorie || 'General' %> </span></p>
-                    <p><strong>Descriere:</strong> <span class="descriere"><%- locals.prod.descriere || 'Nu există o descriere pentru acest album.' %> </span></p>
-                    <p><strong>Data adăugării:</strong> <span class="data_adaugare"><%- locals.prod.data_adaugare || 'N/A' %> </span></p>
-                    
-                    <figure class="imag-produs" style="margin-top: 1rem;">
-                        <img src="/resurse/imagini/galerie<%- locals.prod.fisier_imagine || locals.prod.imagine || 'default.jpg' %>" alt="[Coperta <%- locals.prod.nume || locals.prod.titlu %>]" style="max-width: 300px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-                    </figure>    
-                </article>
-            <% } else { %>
-                <div style="padding: 2rem; text-align: center; color: red;">
-                    <h3>Eroare: Produsul nu a putut fi încărcat!</h3>
-                    <p>Se pare că nu am primit datele pentru acest album.</p>
-                </div>
-            <% } %>
-            
-        </section>
-    </main>
+<head>
 
-    <%- include("../fragments/footer.ejs") %>
-    
-    </body>
+    <meta name="description"
+          content="Detalii despre albumul <%- locals.prod.nume %> de la <%- locals.prod.artist %>.">
+
+    <meta name="keywords"
+          content="muzica, vinyl, cd, <%- locals.prod.nume %>, <%- locals.prod.artist %>">
+
+    <title>
+        MagazinCD - <%- locals.prod.nume %>
+    </title>
+
+    <%- include("../fragments/head") %>
+
+    <link href="/Resurse/CSS/produs.css"
+          type="text/css"
+          rel="stylesheet" />
+
+</head>
+
+<body>
+
+<%- include("../fragments/header") %>
+
+<main>
+
+<section>
+
+    <h2>Detalii Album</h2>
+
+    <article id="art-produs">
+
+        <h3>
+            <span class="nume">
+                <%- locals.prod.nume %>
+            </span>
+        </h3>
+
+        <div class="continut-produs">
+
+            <figure class="imag-produs">
+
+                <img src="/<%- locals.prod.imagine %>"
+                     alt="[imagine <%- locals.prod.nume %>]"
+                     style="max-width:400px; height:auto;" />
+
+            </figure>
+
+            <div class="detalii-text">
+
+                <p>
+                    <strong>Artist:</strong>
+
+                    <span class="artist">
+                        <%- locals.prod.artist %>
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Preț:</strong>
+
+                    <span class="pret">
+                        <%- locals.prod.pret %> lei
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Descriere:</strong>
+
+                    <span class="descriere">
+                        <%- locals.prod.descriere %>
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Categorie:</strong>
+
+                    <span class="categorie">
+                        <%- locals.prod.categorie %>
+                    </span>
+                </p>
+
+                <p>
+                    <strong>An lansare:</strong>
+
+                    <span class="an">
+                        <%- locals.prod.an_lansare %>
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Format:</strong>
+
+                    <span class="format">
+                        <%- locals.prod.format_album %>
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Ediție limitată:</strong>
+
+                    <span class="editie">
+                        <%- locals.prod.editie_limitata ? 'Da' : 'Nu' %>
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Data adăugării:</strong>
+
+                    <time datetime="<%- locals.prod.data_adaugare %>">
+
+                        <% 
+                            const zile = ['Duminică','Luni','Marți','Miercuri','Joi','Vineri','Sâmbătă'];
+                            const luni = ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
+
+                            let d = new Date(locals.prod.data_adaugare);
+
+                            let dataRo =
+                                zile[d.getDay()] + ", " +
+                                d.getDate() + " " +
+                                luni[d.getMonth()] + " " +
+                                d.getFullYear();
+                        %>
+
+                        <%- dataRo %>
+
+                    </time>
+                </p>
+
+            </div>
+
+        </div>
+
+        <a href="/produse" class="btn btn-primary mt-4">
+            Înapoi la toate albumele
+        </a>
+
+    </article>
+
+</section>
+
+</main>
+
+<%- include("../fragments/footer") %>
+
+</body>
 </html>

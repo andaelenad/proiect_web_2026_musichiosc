@@ -1,30 +1,53 @@
-<%- include("../fragments/header.ejs") %>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <%- include('../fragments/head.ejs') %>
+    
+    <link rel="stylesheet" href="/Resurse/CSS/galerie.css">
+    <link rel="stylesheet" href="/Resurse/CSS/efecte.css">
+    
+    <title>Galerie & Efecte CSS</title>
+</head>
+<body id="pag_sus">
+    <%- include('../fragments/header.ejs') %>
 
-<main>
-    <section class="galerie-animata">
-        <% imaginiAnimatie.forEach(function(img) { %>
-            <figure>
-                <img src="<%= img.fisier %>" alt="<%= img.alt || img.titlu %>">
-            </figure>
-        <% }); %>
-    </section>
+    <main>
+        <hr class="hr-stilizat">
 
-    <hr class="hr-special">
+        <div class="container text-center mt-5 mb-5">
+            <h1>Secțiune Efecte CSS</h1>
+            
+            <div class="container-reflexie mt-4 mb-5">
+                <span class="text-original">Un text</span>
+                <span class="text-reflectat">Un text</span>
+            </div>
 
-    <section id="galerie-statica">
-        <div class="grid-galerie">
-            <% imagini.forEach(function(img) { %>
-                <figure title="<%= img.descriere %>" class="item-galerie">
-                    <picture>
-                        <img src="<%= img.fisier %>" alt="<%= img.alt || img.titlu %>">
-                    </picture>
-                    <figcaption>
-                        <span class="index-alfabetic"></span> <%= img.titlu %>
-                    </figcaption>
-                </figure>
-            <% }); %>
+            <div class="efect-duotone mx-auto" style="background-image: url('/resurse/imagini/galerie/1.jpg');"></div>
         </div>
-    </section>
-</main>
 
-<%- include("../fragments/footer.ejs") %>
+        <hr class="hr-stilizat">
+
+        <section class="sectiune-animata d-none d-lg-block text-center mt-5 mb-5">
+            <h2>Galerie Animată (Dinamică SASS)</h2>
+            <div class="galerie-animata-container mx-auto">
+                <% if(locals.imaginiAnimatie && imaginiAnimatie.length > 0) { %>
+                    <% for(let i=0; i < imaginiAnimatie.length; i++) { %>
+                        <figure>
+                            <img src="<%= imaginiAnimatie[i].fisier %>" alt="<%= imaginiAnimatie[i].continut_alternativ || imaginiAnimatie[i].nume %>">
+                        </figure>
+                    <% } %>
+                <% } else { %>
+                    <p>Nu există imagini pentru galeria animată.</p>
+                <% } %>
+            </div>
+        </section>
+
+        <%- include('../fragments/galerie_statica.ejs') %>
+
+    </main>
+
+    <%- include('../fragments/footer.ejs') %>
+    
+    <script src="/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

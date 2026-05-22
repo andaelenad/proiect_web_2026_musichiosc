@@ -3,17 +3,31 @@
 
 <head>
     <%- include('../fragments/head.ejs') %>
+    <link rel="stylesheet" href="/Resurse/CSS/customizare_bootstrap.css">
+    <link rel="stylesheet" href="/Resurse/CSS/galerie.css">
+    <link rel="stylesheet" href="/Resurse/CSS/efecte.css">
+     
     <title>Musichiosc - Paradisul Colecționarului de Sunete</title>
 </head>
 
 <body id="pag_sus">
     <%- include('../fragments/header.ejs') %>
     <main>
-        <div id="grid-pagina">
+    <div id="grid-pagina">
+        <div class="zona-grid" style="grid-column: 1 / -1;">
+             <%- include('../fragments/galerie_statica.ejs') %>
+        </div>
 
+        <section id="welcome" class="zona-grid">
+            </section>
+        
+        </div>
+
+        
             <section id="welcome" class="zona-grid">
                 <article>
                     <hgroup>
+                    
                         <h2>Bun venit în sanctuarul Musichiosc! <i class="fa-solid fa-record-vinyl fa-spin"></i></h2>
                         <p class="subtitlu">Tradiție și fidelitate în fiecare <b>disc de vinil</b></p>
                     </hgroup>
@@ -249,7 +263,7 @@
                 <hr>
 
                 <section id="recenzii">
-                    <h2>Ce spun clienții noștri (Mărturii)</h2>
+                  <div class="card p-3 mt-3"  <h2>Ce spun clienții noștri (Mărturii)</h2> </div></section>
                     <article>
                         <h4>Mihai A. - Colecționar Jazz</h4>
                         <p>"Am primit <b>vinyl2.png</b> în stare perfectă. Sunetul este incredibil pe noul meu pickup Pro-Ject. Recomand Musichiosc!"</p>
@@ -291,40 +305,26 @@
             </section>
             </div>
 
-        <section id="galerie-imagini">
-            <h2>Galerie Foto Produse</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-                <section id="fig1" style="flex: 1; min-width: 250px;">
-                    <figure class="fg-img">
-                        <a href="./resurse/imagini/Kendrick_Lamar_damn.png" target="_blank">
-                            <img src="./resurse/imagini/Kendrick_Lamar_damn.png" alt="Kendrick Lamar Damn" width="100%">
-                        </a>
-                        <figcaption>Kendrick Lamar - DAMN. (LP)</figcaption>
-                    </figure>
-                </section>
-
-                <section id="fig2" style="flex: 1; min-width: 250px;">
-                    <figure class="fg-img">
-                        <a href="./resurse/imagini/muzica.png" target="_blank">
-                            <img src="./resurse/imagini/muzica.png" alt="Logo Muzica" width="100%">
-                        </a>
-                        <figcaption>Simbol Muzical Brand</figcaption>
-                    </figure>
-                </section>
-
-                <section id="fig3" style="flex: 1; min-width: 250px;">
-                    <figure class="fg-img">
-                        <a href="./resurse/imagini/vinyl1.png" target="_blank">
-                            <img src="./resurse/imagini/vinyl1.png" alt="Vinyl 1" width="100%">
-                        </a>
-                        <figcaption>Structură Micro-Groove Vinyl 1</figcaption>
-                    </figure>
-                </section>
-            </div>
+    
         </section>
+          <section id="video-demo">
+            <h2>Demonstrații Audio-Video</h2>
+            <p>Vizualizați cum se comportă un vinil de înaltă fidelitate în timpul redării și cum să vă întrețineți echipamentul acasă.</p>
+            
+            <video id="video-prezentare" poster="./resurse/imagini/vinyl1.png" controls preload="none">
+                <source src="./resurse/video/prezentare.mp4" type="video/mp4">
+                <source src="./resurse/video/prezentare.webm" type="video/webm">
+                <track src="./resurse/vtt/ro.vtt" kind="subtitles" srclang="ro" label="Romana" default>
+                <track src="./resurse/vtt/en.vtt" kind="subtitles" srclang="en" label="English">
+                browserul dumneavoastra nu suporta afisarea videoclipului.
+            </video>
+        </section>
+        
 
         <section id="video-demo">
             <h2>Demonstrații Audio-Video</h2>
+                                <a href="http://www.youtube.com/embed/4fYMjvSl2Fk" target="ifr-video">Instalare Pickup</a>
+
             <p>Vizualizați cum să vă întrețineți echipamentul Hi-Fi direct de la experții noștri.</p>
             <div class="container-iframe">
                 <div class="taburi-iframe">

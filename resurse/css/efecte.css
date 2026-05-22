@@ -1,63 +1,90 @@
-.hr-special {
+@charset "UTF-8";
+/* =========================================
+   HR STILIZAT (Gradient liniar repetitiv)
+========================================= */
+.hr-stilizat {
   border: none;
-  height: 15px;
-  margin: 2rem 0;
-  background: repeating-linear-gradient(90deg, #800020 0%, #800020 5%, transparent 5%, transparent 10%);
-}
-
-hr {
   height: 12px;
-  border: none;
-  margin: 2rem 0;
-  background: repeating-linear-gradient(45deg, #800020 0px, #800020 10px, transparent 10px, transparent 20px, #bc8f8f 20px, #bc8f8f 30px, transparent 30px, transparent 40px);
-  opacity: 0.8;
+  width: 80%;
+  margin: 2rem auto;
+  /* Ajustează culorile (var(--culoare)) în funcție de schema ta din custom.scss */
+  background: repeating-linear-gradient(45deg, transparent, transparent 15px, #4facfe 15px, #4facfe 30px, #00f2fe 30px, #00f2fe 45px);
 }
 
-.duotone-box {
-  background-image: url("/resurse/imagini/galerie/1.jpg");
-  width: 300px;
+/* =========================================
+   REFLEXIE TEXT
+========================================= */
+.container-reflexie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 4rem;
+  font-weight: 800;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: color 0.5s ease;
+  color: #333333;
+}
+.container-reflexie .text-original {
+  color: inherit;
+}
+.container-reflexie .text-reflectat {
+  color: inherit;
+  opacity: 0.4;
+  /* Reflexie reflectată pe axa OY (dreapta) + ușoară aplecare */
+  transform: scaleX(-1) skewY(-5deg);
+  transform-origin: center left;
+}
+.container-reflexie {
+  /* Schimbă culoarea ambelor texte la hover */
+}
+.container-reflexie:hover {
+  color: #e91e63;
+}
+
+/* =========================================
+   EFECT DUOTONE LA GRAYSCALE
+========================================= */
+.efect-duotone {
+  position: relative;
+  width: 400px;
   height: 300px;
-  margin: 20px auto;
   background-size: cover;
   background-position: center;
-  position: relative;
-  transition: filter 0.8s ease;
   overflow: hidden;
+  /* Trecere treptată în grayscale la hover */
+  transition: filter 1s ease;
+  border-radius: 10px;
+  /* Cele două pseudo-elemente pentru Duotone */
 }
-.duotone-box::before, .duotone-box::after {
+.efect-duotone::before, .efect-duotone::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
+  background-color: inherit;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: opacity 1s ease;
 }
-.duotone-box::before {
-  background-color: #30002c;
+.efect-duotone {
+  /* Adăugăm culorile c1 și c2 dorite pentru mix-blend-mode */
+}
+.efect-duotone::before {
+  background: #0000ff; /* Albastru */
+  mix-blend-mode: screen;
+}
+.efect-duotone::after {
+  background: #ff0000; /* Roșu */
   mix-blend-mode: multiply;
 }
-.duotone-box::after {
-  background-color: #ff0055;
-  mix-blend-mode: lighten;
-}
-.duotone-box:hover {
+.efect-duotone:hover {
   filter: grayscale(100%);
+  /* Pe hover anulăm/ascundem efectul de blend pentru a lăsa imaginea curată gri */
 }
-
-.reflexie-container {
-  text-align: center;
-  margin: 50px 0;
-}
-
-.text-reflexie {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #333;
-  position: relative;
-  display: inline-block;
-  transition: color 0.5s ease;
-  -webkit-box-reflect: right 5px linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
-}
-.text-reflexie:hover {
-  color: #800020;
+.efect-duotone:hover::before, .efect-duotone:hover::after {
+  opacity: 0;
 }
