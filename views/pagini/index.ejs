@@ -3,9 +3,9 @@
 
 <head>
     <%- include('../fragments/head.ejs') %>
-    <link rel="stylesheet" href="/Resurse/CSS/customizare_bootstrap.css">
-    <link rel="stylesheet" href="/Resurse/CSS/galerie.css">
-    <link rel="stylesheet" href="/Resurse/CSS/efecte.css">
+    <link rel="stylesheet" href="/resurse/css/customizare_bootstrap.css">
+    <link rel="stylesheet" href="/resurse/css/galerie.css">
+    <link rel="stylesheet" href="/resurse/css/efecte.css">
      
     <title>Musichiosc - Paradisul Colecționarului de Sunete</title>
 </head>
@@ -30,6 +30,15 @@
                     
                         <h2>Bun venit în sanctuarul Musichiosc! <i class="fa-solid fa-record-vinyl fa-spin"></i></h2>
                         <p class="subtitlu">Tradiție și fidelitate în fiecare <b>disc de vinil</b></p>
+                   <div id="produse-container">
+    <div class="produs" data-categorie="laptop">Laptop X</div>
+    <div class="produs" data-categorie="telefon">Telefon Y</div>
+    <div class="produs" data-categorie="laptop">Laptop Z</div>
+</div>
+
+<p id="mesaj-lipsa-produse" style="display: none; color: red;">
+    Nu există produse conform filtrării curente.
+</p>
                     </hgroup>
 
                     <figure>
@@ -359,7 +368,9 @@
 
 
     <%- include('../fragments/footer.ejs') %>
+    <script src="/resurse/js/tema.js"></script>
     <p class="banner-proiect">Acesta este un proiect școlar!</p>
+</p>
     
     <div id="watermark-print">
         <span>Dutescu</span><br>

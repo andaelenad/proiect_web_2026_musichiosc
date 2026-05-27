@@ -17,8 +17,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "cookie-parser": "^1.4.7",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "formidable": "^3.5.4",
+    "nodemailer": "^8.0.9",
     "pg": "^8.21.0",
     "sass": "^1.99.0",
     "sharp": "^0.34.5"

@@ -1,144 +1,268 @@
 <!DOCTYPE html>
 <html lang="ro">
-    <head>
-        <meta name="description" content="Musichiosc oferă CD-uri, vinyl-uri și albume de colecție cu opțiunea de achiziție online.">
-        <meta name="keywords" content="CD, muzica, vinyl, magazin muzica, albume, artisti, Musichiosc">
-        <link rel="stylesheet" href="/Resurse/CSS/produse.css" type="text/css" />
-        <title>Musichiosc - Produse (CD-uri)</title>
-        
-        <%- include("../fragments/head.ejs") %>     
-        
-        <script type="text/javascript" src="/Resurse/js/produse.js"></script>
-        <script type="text/javascript" src="/Resurse/js/produse-cos.js"></script>
-    </head>
-    <body>
+<head>
+    <meta name="description" content="MagazinCD - Albume muzicale pe vinyl, CD și ediții collector.">
+    <meta name="keywords" content="muzica, vinyl, cd, rap, rock, jazz, kendrick lamar, eminem, pink floyd">
 
-    <%- include("../fragments/header.ejs") %>
+    <link rel="stylesheet" href="/resurse/css/produse.css"  />
+        <link rel="stylesheet" href="/resurse/css/customizare_bootstrap.css">
+    <link rel="stylesheet" href="/resurse/css/galerie.css">
+    <link rel="stylesheet" href="/resurse/css/efecte.css">
+    <link rel="stylesheet" href="/resurse/css/general.css" />
 
-    <main>
-        <div class="filtre-container">
-            <label> Căutare Album/Artist: <input type="text" id="inp-nume"></label>
-            
-            <div> Anul lansării:
-                <p><label>Classic (Înainte de 2000)
-                    <input id="i_rad1"  name="gr_rad" value="0:1999" type="radio"/>
-                </label></p>
-                <p><label>Anii 2000s (2000 - 2010)
-                    <input id="i_rad2"  name="gr_rad" value="2000:2010" type="radio"/>
-                </label></p>
-                <p><label>Modern (După 2010)
-                    <input id="i_rad3" name="gr_rad" value="2011:3000" type="radio"/>
-                </label></p>
-                <p><label>Toate perioadele
-                    <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-                </label></p>
-            </div>
+    <title>MagazinCD - Produse</title>
 
-            <label> Preț minim: <input type="range" id="inp-pret" value="0" min="0" max="250"> <span id="infoRange">(0) Lei</span></label>
-            
-            <label>Gen muzical:
-                <select id="inp-categorie">
-                    <option id="sel-toate" selected value="toate">Toate genurile</option>
-                    <option value="Rap">Rap</option>
-                    <option value="Rock">Rock</option>
-                    <option value="Pop">Pop</option>
-                    <option value="Jazz">Jazz</option>
-                    <option value="Electronic">Electronic</option>
-                    <option value="Reggae">Reggae</option>
-                </select>
+    <%- include("../fragments/head") %>
+
+    <script src="/resurse/js/cookies.js"></script>
+    <script src="/resurse/js/filtre.js"></script>
+    <script src="/resurse/js/comparare.js"></script>
+</head>
+
+<body>
+
+<%- include("../fragments/header") %>
+
+<main>
+    <section class="container">
+
+    <h2>Produse</h2>
+
+    <p id="nr-produse"></p>
+
+    <div id="produse-filtre">
+
+<div id="filtre" class="row g-4 align-items-center mb-5 mt-5 pt-4 bg-light p-4 rounded shadow-sm">
+
+    <!-- tema -->
+    <div class="col-12 d-flex justify-content-end border-bottom pb-2 mb-2">
+        <div class="form-check form-switch fs-4 mb-0">
+            <input class="form-check-input" type="checkbox" role="switch" id="btn-schimba-tema">
+
+            <label class="form-check-label text-secondary" for="btn-schimba-tema">
+                <i id="icon-tema" class="fa-solid fa-moon"></i>
             </label>
-
-            <p>
-                <button class="c1 c2 c3" id="filtrare">Filtrează</button> 
-                <button id="resetare">Resetează</button><br/>
-                <button id="sortCrescNume">Sortează crescător (preț și nume)</button>
-                <button id="sortDescrescNume">Sortează descrescător (preț și nume)</button>
-            </p>
-          
-            <p id="p-suma">Apăsați Alt+"c" pentru suma prețurilor produselor afișate.</p>
         </div>
-    <div class="reflexie-wrapper">
-        <h1 class="text-original">Musichiosc Gallery</h1>
-        <h1 class="text-reflexie">Musichiosc Gallery</h1>
     </div>
-<section class="duotone-section">
-    <h2>Efect Duotone</h2>
-    <div class="duotone-box"></div>
-</section>
-    <hr class="hr-special">
-<div class="duotone-box"></div>
-    <section id="galerie-statica">
-        <div class="grid-galerie">
-            <% if (locals.imaginiGalerie) { %>
-                <% imaginiGalerie.forEach(function(img) { %>
-                    <figure title="<%= img.descriere %>" class="item-galerie">
-                        <picture>
-                            <source srcset="<%= cale_galerie %>/mic-<%= img.cale_imagine %>" media="(max-width: 700px)">
-                            <source srcset="<%= cale_galerie %>/mediu-<%= img.cale_imagine %>" media="(max-width: 1000px)">
-                            <img src="<%= cale_galerie %>/<%= img.cale_imagine %>" alt="<%= img.alt || img.cale_imagine %>">
-                        </picture>
-                        <figcaption>
-                            <span class="index-alfabetic"></span> <%= img.titlu %>
-                        </figcaption>
-                    </figure>
-                <% }); %>
+
+    <!-- nume -->
+    <div class="col-12 col-md-4">
+        <label for="inp-nume" class="form-label fw-bold">Album:</label>
+
+        <input type="text"
+               id="inp-nume"
+               class="form-control form-control-lg"
+               placeholder="Caută album...">
+    </div>
+
+    <!-- artist -->
+    <div class="col-12 col-md-4">
+        <label for="inp-artist" class="form-label fw-bold">Artist:</label>
+
+        <input type="text"
+               id="inp-artist"
+               class="form-control form-control-lg"
+               placeholder="Caută artist...">
+    </div>
+
+    <!-- categorie -->
+    <div class="col-12 col-md-4">
+        <label for="inp-categorie" class="form-label fw-bold">Gen muzical:</label>
+
+        <select id="inp-categorie" class="form-select form-select-lg">
+            <option selected value="toate">Toate</option>
+
+            <% for (let opt of locals.optiuni) { %>
+                <option value="<%- opt.categorie %>">
+                    <%- opt.categorie %>
+                </option>
             <% } %>
+        </select>
+    </div>
+
+    <!-- range pret -->
+    <div class="col-12 col-md-6">
+        <label for="inp-pret" class="form-label fw-bold">
+            Preț minim:
+            <span id="infoRange">(0 lei)</span>
+        </label>
+
+        <div class="d-flex align-items-center gap-2">
+            <span>0</span>
+
+            <input type="range"
+                   class="form-range"
+                   id="inp-pret"
+                   value="0"
+                   min="0"
+                   max="500">
+
+            <span>500</span>
         </div>
-    </section>
-    <section class="galerie-animata">
-    <% if (locals.imaginiAnimatie && imaginiAnimatie.length > 0) { %>
-        <% imaginiAnimatie.forEach(function(img) { %>
-            <figure>
-                <img src="<%= img.fisier %>" alt="imagine">
-            </figure>
-        <% }); %>
-    <% } else { %>
-        <p>Nu sunt imagini pentru animație.</p>
-    <% } %>
-</section>
+    </div>
 
-    <hr class="hr-special">
+    <!-- editie limitata -->
+    <div class="col-12 col-md-6 d-flex align-items-center">
 
-    <div class="filtre-container">
+        <input type="checkbox"
+               class="btn-check"
+               id="inp-editie"
+               autocomplete="off">
+
+        <label class="btn btn-outline-secondary btn-lg w-100" for="inp-editie">
+            <i class="bi bi-vinyl-fill"></i>
+            <span class="d-none d-sm-inline">
+                Doar ediții limitate
+            </span>
+        </label>
+    </div>
+
+    <!-- sortari -->
+     <p id="mesaj-filtrare" style="display:none">
+    Nu exista produse conform filtrarii.
+</p>
+    <div class="col-12 mt-4">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+
+            <button id="filtrare" class="btn btn-primary btn-lg">
+                <i class="bi bi-funnel-fill"></i>
+                <span class="d-none d-sm-inline">Filtrează</span>
+            </button>
+
+            <button id="resetare" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-arrow-counterclockwise"></i>
+                <span class="d-none d-sm-inline">Resetează</span>
+            </button>
+
+            <button id="sortCrescNume" class="btn btn-primary btn-lg">
+                <i class="bi bi-sort-alpha-down"></i>
+                <span class="d-none d-sm-inline">Sort A-Z</span>
+            </button>
+
+            <button id="sortDescrescNume" class="btn btn-primary btn-lg">
+                <i class="bi bi-sort-alpha-up"></i>
+                <span class="d-none d-sm-inline">Sort Z-A</span>
+            </button>
         </div>
-    
+    </div>
+</div>
+<div class="col-md-3">
 
-        <section id="produse">
-            <h2 class="reflexie">Colecția de CD-uri</h2>
-            <div class="grid-produse">
-                <% if (locals.produse && locals.produse.length > 0) { %>
-                    <% for( let prod of locals.produse) { %>
-                        <article class="produs">
-                            <h3 class="nume">Album: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume %></span></a></h3>
-                            
-                            <div class="info-prod">
-                                <p class="artist">Artist: <span class="val-artist"><%- prod.artist %></span></p>
-                                <p class="pret">Preț: <span class="val-pret"><%- prod.pret %></span> Lei</p>
-                                <p class="an-lansare">An lansare: <span class="val-an"><%- prod.an_lansare %></span></p>
-                            </div>
-                            
-                            <p class="categorie">Gen muzical: <span class="val-categorie"><%- prod.categorie %></span></p>
-                            
-                            <figure>
-                                <a href="/produs/<%-prod.id %>">
-                                    <img src="<%- prod.fisier %>" style="width:100%; max-width:200px; height:auto;" alt="<%- prod.continut_alternativ %>" />
-                                </a>
-                            </figure>
-                            
-                            <label class="selecteaza-cos">
-                                Selectează:<br/>
-                                <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                            </label>
-                        </article>
-                    <% } %>
-                <% } else { %>
-                    <p>Nu există CD-uri disponibile momentan.</p>
-                <% } %>
+    <input
+        type="checkbox"
+        id="salveaza-filtre">
+
+    <label for="salveaza-filtre">
+        Salveaza filtrare
+    </label>
+
+</div>
+
+
+<!-- produse -->
+<section id="produse" class="mt-5">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 grid-produse">
+
+        <% for(let prod of locals.produse){ %>
+
+            <div class="col produs" id="articol_<%- prod.id %>">
+
+                <article class="card h-100 shadow-sm border-0">
+
+                    <figure class="m-0 overflow-hidden" style="height:300px;">
+                        <img src="/<%- prod.imagine %>"
+                             class="card-img-top w-100 h-100"
+                             style="object-fit:cover;"
+                             alt="<%- prod.nume %>">
+                    </figure>
+
+                    <div class="card-body d-flex flex-column">
+
+                        <h4 class="card-title text-center mb-1">
+                            <a href="/produs/<%- prod.id %>"
+                               class="text-decoration-none text-dark fw-bold nume">
+
+                                <span class="val-nume">
+                                    <%- prod.nume %>
+                                </span>
+                            </a>
+                        </h4>
+
+                        <p class="text-center text-muted mb-2">
+                            <span class="val-artist">
+                                <%- prod.artist %>
+                            </span>
+                        </p>
+
+                        <p class="card-text text-center small categorie">
+                            <span class="badge bg-secondary val-categorie">
+                                <%- prod.categorie %>
+                            </span>
+                        </p>
+
+                        <div class="info-prod mb-3 text-center fst-italic text-secondary small">
+                            <span class="val-descriere">
+                                <%- prod.descriere %>
+                            </span>
+                        </div>
+
+                        <ul class="list-group list-group-flush mt-auto small">
+
+                            <li class="list-group-item d-flex justify-content-between bg-transparent px-0">
+                                <span>
+                                    <i class="bi bi-tag-fill text-primary"></i>
+                                    Preț:
+                                </span>
+
+                                <strong>
+                                    <span class="val-pret">
+                                        <%- prod.pret %>
+                                    </span> lei
+                                </strong>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between bg-transparent px-0">
+                                <span>
+                                    <i class="bi bi-calendar-fill text-success"></i>
+                                    Lansare:
+                                </span>
+
+                                <span class="val-an">
+                                    <%- prod.an_lansare %>
+                                </span>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between bg-transparent px-0">
+                                <span>
+                                    <i class="bi bi-vinyl-fill text-danger"></i>
+                                    Ediție limitată:
+                                </span>
+
+                                <span>
+                                    <%- prod.editie_limitata ? 'Da' : 'Nu' %>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </article>
             </div>
-        </section>
-    </main>
 
-    <%- include("../fragments/footer.ejs") %>
-    
-    </body>
+        <% } %>
+
+    </div>
+</section>
+<script src="/resurse/js/produse.js"></script>
+
+
+
+<script src="/resurse/js/cookies.js"></script>
+
+<script src="/resurse/js/comparare.js"></script>
+</main>
+
+<%- include("../fragments/footer") %>
+
+</body>
 </html>

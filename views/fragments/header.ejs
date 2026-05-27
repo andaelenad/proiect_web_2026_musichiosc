@@ -1,6 +1,21 @@
 <header style="z-index: 2000; position: relative;">
     <h1> Musichiosc </h1>
     <img src="/resurse/imagini/sigla.png" width="60" height="70" alt="sigla Musichiosc" title="Logo Oficial Musichiosc" />
+<script src="/resurse/js/tema.js"></script>
+
+<div class="theme-switcher">
+    <span>Alege tema:</span>
+    
+    <input type="radio" id="theme-light" name="theme" value="light">
+    <label for="theme-light"><i class="fas fa-sun"></i> Light</label>
+
+    <input type="radio" id="theme-dark" name="theme" value="dark">
+    <label for="theme-dark"><i class="fas fa-moon"></i> Dark</label>
+
+    <input type="radio" id="theme-ocean" name="theme" value="ocean">
+    <label for="theme-ocean"><i class="fas fa-water"></i> Ocean</label>
+</div>
+
 
     <nav>
         <label id="hamburger" for="ch-menu">
@@ -16,6 +31,7 @@
                     <i class="fas fa-house"></i>
                     <span class="text-nav">Acasa</span>
                 </a>
+                
                 <ul class="submeniu">
                     <li><a href="/index#welcome">Sanctuar Audio</a></li>
                     <li><a href="/index#promotii">Pachete Exclusive</a></li>
@@ -43,13 +59,22 @@
                 <a href="#">
                     <i class="fas fa-user-plus"></i>
                     <span class="text-nav">Cont Client</span>
+                    
                 </a>
-                <ul class="submeniu">
-                    <li><a href="#">Autentificare</a></li>
-                    <li><a href="#">Creare Cont</a></li>
-                    <li><a href="#">Wishlist Vinyl</a></li>
-                </ul>
-            </li>
+    
+    <ul class="submeniu"> 
+        <% if (locals.utilizator) { %>
+            <li><a href="/profil">Salut, <%= locals.utilizator.username %></a></li>
+            <li><a href="/comenzi">Comenzile mele</a></li>
+            <li><a href="/logout">Deconectare</a></li>
+        <% } else { %>
+            <li><a href="/login">Autentificare</a></li>
+            <li><a href="/inregistrare">Creare Cont</a></li>
+        <% } %>
+        
+        <li><a href="/wishlist">Wishlist Vinyl</a></li>
+    </ul>
+</li>
 
             <li>
                 <a href="/despre">
@@ -81,5 +106,16 @@
                 </a>
             </li>
         </ul>
-    </nav>
+   
+
+    <span id="mesaj-cookies">
+
+        Acceptati cookie-urile?
+
+        <button id="ok_cookies">
+            Ok
+        </button>
+
+    </span>
+</p></nav>
 </header>

@@ -53,6 +53,7 @@
   transition: filter 1s ease;
   border-radius: 10px;
   /* Cele două pseudo-elemente pentru Duotone */
+  /* Adăugăm culorile c1 și c2 dorite pentru mix-blend-mode */
 }
 .efect-duotone::before, .efect-duotone::after {
   content: "";
@@ -66,15 +67,14 @@
   pointer-events: none;
   transition: opacity 1s ease;
 }
-.efect-duotone {
-  /* Adăugăm culorile c1 și c2 dorite pentru mix-blend-mode */
-}
 .efect-duotone::before {
-  background: #0000ff; /* Albastru */
+  background: #0000ff;
+  /* Albastru */
   mix-blend-mode: screen;
 }
 .efect-duotone::after {
-  background: #ff0000; /* Roșu */
+  background: #ff0000;
+  /* Roșu */
   mix-blend-mode: multiply;
 }
 .efect-duotone:hover {
@@ -92,12 +92,15 @@
 :root,
 [data-bs-theme=light] {
   --color-main: #D81B60;
-  --color-bg-light: #FCE4EC; /* Fundalul paginii */
-  --color-bg-dark: #2C1A22; /* Accente închise (butoane sus, etc) */
+  --color-bg-light: #FCE4EC;
+  /* Fundalul paginii */
+  --color-bg-dark: #2C1A22;
+  /* Accente închise (butoane sus, etc) */
   --color-text: #4A2C38;
   --color-highlight: #FF4081;
   --color-border: #F48FB1;
-  --color-box-bg: #ffffff; /* NOU: Fundalul pentru containere (header, grid) */
+  --color-box-bg: #ffffff;
+  /* NOU: Fundalul pentru containere (header, grid) */
   --spatiu-lateral: 10vw;
   --spatiu-box: 1.5rem;
   --gap-grid: 1.5rem;
@@ -108,13 +111,18 @@
 
 /* Tema Dark (Păstrăm estetica ta, dar inversăm tonurile) */
 [data-bs-theme=dark] {
-  --color-main: #FF4081; /* Roz mai deschis pentru contrast pe negru */
-  --color-bg-light: #1a0f14; /* Fundal foarte închis (aproape negru) */
-  --color-bg-dark: #FCE4EC; /* Inversat pentru vizibilitate */
-  --color-text: #FCE4EC; /* Text deschis */
+  --color-main: #FF4081;
+  /* Roz mai deschis pentru contrast pe negru */
+  --color-bg-light: #1a0f14;
+  /* Fundal foarte închis (aproape negru) */
+  --color-bg-dark: #FCE4EC;
+  /* Inversat pentru vizibilitate */
+  --color-text: #FCE4EC;
+  /* Text deschis */
   --color-highlight: #D81B60;
   --color-border: #8c264a;
-  --color-box-bg: #2C1A22; /* Cutii colorate în burgundy închis */
+  --color-box-bg: #2C1A22;
+  /* Cutii colorate în burgundy închis */
   /* Bootstrap Overrides */
   --bs-body-bg: var(--color-bg-light);
   --bs-body-color: var(--color-text);
@@ -123,12 +131,14 @@
 /* Tema Ocean (Nuanțe de albastru/cyan) */
 [data-bs-theme=ocean] {
   --color-main: #00b4d8;
-  --color-bg-light: #031A2F; /* Albastru foarte închis (fundal) */
+  --color-bg-light: #031A2F;
+  /* Albastru foarte închis (fundal) */
   --color-bg-dark: #0077b6;
   --color-text: #e0f7fa;
   --color-highlight: #90e0ef;
   --color-border: #0077b6;
-  --color-box-bg: #0b2e59; /* Cutii albastru marin */
+  --color-box-bg: #0b2e59;
+  /* Cutii albastru marin */
   /* Bootstrap Overrides */
   --bs-body-bg: var(--color-bg-light);
   --bs-body-color: var(--color-text);

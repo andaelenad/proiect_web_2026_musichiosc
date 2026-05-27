@@ -7,12 +7,15 @@
 }
 
 .produs {
-  background-color: var(--color-box-bg); /* Modificat din #ffffff */
+  background-color: var(--color-box-bg);
+  /* Modificat din #ffffff */
   border-radius: 15px;
   padding: 20px;
-  border: 1px solid var(--color-border); /* Modificat din #f8bbd0 */
+  border: 1px solid var(--color-border);
+  /* Modificat din #f8bbd0 */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, background-color 0.5s ease, border-color 0.5s ease; /* Adăugat tranziție temă */
+  transition: transform 0.3s ease, background-color 0.5s ease, border-color 0.5s ease;
+  /* Adăugat tranziție temă */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,13 +50,17 @@
 }
 
 .filtre-container {
-  background-color: var(--color-box-bg); /* Modificat din white */
-  color: var(--color-text); /* Adăugat pentru textul filtrelor */
+  background-color: var(--color-box-bg);
+  /* Modificat din white */
+  color: var(--color-text);
+  /* Adăugat pentru textul filtrelor */
   padding: 20px;
   margin: 20px;
   border-radius: 15px;
-  border: 1px solid var(--color-border); /* Modificat din #f8bbd0 */
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; /* Adăugat tranziție temă */
+  border: 1px solid var(--color-border);
+  /* Modificat din #f8bbd0 */
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+  /* Adăugat tranziție temă */
 }
 
 .filtre-container input,
@@ -83,10 +90,11 @@
 .reflexie-wrapper .text-reflexie {
   transform: scaleX(-1);
   opacity: 0.3;
-  mask-image: linear-gradient(to left, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(to left, black, rgba(0, 0, 0, 0));
 }
 .reflexie-wrapper:hover .text-original, .reflexie-wrapper:hover .text-reflexie {
-  color: var(--color-main); /* Modificat din #D81B60 */
+  color: var(--color-main);
+  /* Modificat din #D81B60 */
 }
 
 .duotone-box {

@@ -115,10 +115,12 @@ header, footer, .zona-grid {
   html {
     font-size: 15px;
   }
+
   :root {
     --spatiu-lateral: 5vw;
     --gap-grid: 1.2rem;
   }
+
   #grid-pagina {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "z1 z1" "z2 z2" "z3 z6" "z5 z6" "z8 z8" "z4 z7";
@@ -128,15 +130,19 @@ header, footer, .zona-grid {
   html {
     font-size: 13px;
   }
+
   :root {
     --spatiu-lateral: 2vw;
   }
+
   #grid-pagina {
     display: block;
   }
+
   .zona-grid {
     margin-bottom: var(--gap-grid);
   }
+
   * {
     animation: none !important;
   }
@@ -231,11 +237,13 @@ iframe[name=ifr-video] {
     flex-direction: column;
     align-items: center;
   }
+
   .taburi-iframe {
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 15px;
   }
+
   .taburi-iframe a {
     border-right: 4px solid var(--color-text);
     margin: 5px;
@@ -381,22 +389,26 @@ main a:active {
     margin: 1cm 3cm 1cm 1cm;
   }
   img, video, iframe, audio, object, canvas,
-  figure figcaption, #link-top, #hamburger, #ch-menu {
+figure figcaption, #link-top, #hamburger, #ch-menu {
     display: none !important;
   }
+
   #grid-pagina, .zona-grid, main {
     display: block !important;
     width: 100% !important;
   }
+
   a {
     color: black !important;
     text-decoration: none !important;
     background: none !important;
   }
+
   header h1 {
     text-align: center;
     margin-bottom: 20px;
   }
+
   nav ul.meniu {
     display: block !important;
     padding-top: 1rem;
@@ -410,20 +422,25 @@ main a:active {
   nav ul.meniu li ul.submeniu {
     display: none !important;
   }
+
   nav {
     page-break-after: always;
   }
+
   main {
     page-break-after: always;
   }
+
   footer {
     page-break-before: always;
   }
+
   .page-container {
     position: relative;
     min-height: 297mm;
     padding-bottom: 50px;
   }
+
   .banner-proiect {
     display: block !important;
     position: absolute;
@@ -436,6 +453,7 @@ main a:active {
     background: white;
     z-index: 9999;
   }
+
   #watermark-print {
     display: flex !important;
     flex-direction: column;

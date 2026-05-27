@@ -1,36 +1,102 @@
 /* =========================================
-   GALERIA ANIMATĂ
+   GALERIA ANIMATA
 ========================================= */
+
 $nrimag: 4 !default;
-$procent: 100 / $nrimag;
+
+$durata-imagine: 3s;
+$durata-totala: $nrimag * $durata-imagine;
 
 .galerie-animata-container {
-    width: 600px; height: 400px; position: relative;
-    border: 15px solid transparent;
-    border-image: url('/Resurse/Imagini/border-pattern.png') 30 stretch;
-    overflow: hidden; margin: 0 auto;
 
-    &:hover figure { animation-play-state: paused; }
+    width: 600px;
+    height: 400px;
+
+    margin: 2rem auto;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border: 15px solid transparent;
+
+    border-image-source: url("/resurse/imagini/galerie/1.jpg");
+    border-image-slice: 30;
+    border-image-repeat: stretch;
 
     figure {
-        position: absolute; top: 0; left: 0;
-        width: 100%; height: 100%; margin: 0; opacity: 0;
-        animation: animatie-clip #{$nrimag * 3}s linear infinite;
 
-        img { width: 100%; height: 100%; object-fit: cover; }
+        position: absolute;
+        inset: 0;
+
+        margin: 0;
+
+        animation-name: animatie-galerie;
+        animation-duration: $durata-totala;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
     }
 
-    @for $i from 1 through 16 {
-        figure:nth-child(#{$i}) { animation-delay: ($i - 1) * 3s; }
+    &:hover figure {
+        animation-play-state: paused;
+    }
+
+    // delay automat in functie de numarul de imagini
+    @for $i from 1 through $nrimag {
+
+        figure:nth-child(#{$i}) {
+
+            animation-delay: ($i - 1) * $durata-imagine;
+        }
     }
 }
 
-@keyframes animatie-clip {
-    0% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-    #{$procent / 2}% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-    #{$procent - 0.1}% { opacity: 1; clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%); }
-    #{$procent}% { opacity: 0; }
-    100% { opacity: 0; }
+/* =========================================
+   ANIMATIE
+========================================= */
+
+@keyframes animatie-galerie {
+
+    0% {
+
+        opacity: 1;
+
+        clip-path: inset(0 0 0 0);
+    }
+
+    70% {
+
+        opacity: 1;
+
+        clip-path: inset(0 0 0 0);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        clip-path: inset(50% 50% 50% 50%);
+    }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media screen and (max-width: 1000px) {
+
+    .galerie-animata-container {
+
+        display: none;
+    }
 }
 
 /* =========================================
@@ -43,7 +109,7 @@ $procent: 100 / $nrimag;
         display: grid;
         gap: 20px;
         margin-top: 20px;
-        counter-reset: roman-counter;
+        counter-reset: literaimagine;
         
         // Forma specifică cerută de 3 coloane și 4 rânduri
         grid-template-areas: 
@@ -58,7 +124,7 @@ $procent: 100 / $nrimag;
         border: 1px solid #eee; border-radius: 8px; overflow: hidden;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         background-color: #fff;
-        counter-increment: roman-counter;
+        counter-increment: literaimagine; 
 
         &:hover {
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -77,7 +143,7 @@ $procent: 100 / $nrimag;
         
         .titlu-imagine {
             font-weight: 600; margin: 0 0 5px 0;
-            &::before { content: counter(roman-counter, lower-roman) ". "; }
+            &::before { content: counter(literaimagine, lower-alpha) ". "; }
         }
     }
 }
